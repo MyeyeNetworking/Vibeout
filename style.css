@@ -103,12 +103,12 @@ nav {
 }
 
 .carousel-title {
-    position: absolute;
-    bottom: 20px;
+    position: relative;
+    bottom: 90px;
     left: 50%;
     transform: translateX(-50%);
     background-color: rgba(0, 0, 0, 0.5);
-    padding: 20px;
+    padding: 10px;
     border-radius: 10px;
     font-size: 2em;
     color: white;
@@ -152,7 +152,7 @@ nav {
     padding: 20px;
     width: 300px;
     text-align: center;
-    background-color: #fff;
+    background-color: #333;
     transition: transform 0.3s ease;
 }
 
