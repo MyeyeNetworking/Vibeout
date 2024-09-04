@@ -1,23 +1,29 @@
-let carouselIndex = 0;
-const slides = document.querySelectorAll('.carousel-slide');
-const prevButton = document.querySelector('.carousel-prev');
-const nextButton = document.querySelector('.carousel-next');
+let currentSlide = 0;
+const slides = document.querySelectorAll('.slide');
+const nextButton = document.querySelector('.next');
+const prevButton = document.querySelector('.prev');
 
 function showSlide(index) {
     slides.forEach((slide, i) => {
-        slide.style.transform = `translateX(${(i - index) * 100}%)`;
+        slide.classList.toggle('active', i === index);
     });
 }
 
 nextButton.addEventListener('click', () => {
-    carouselIndex = (carouselIndex + 1) % slides.length;
-    showSlide(carouselIndex);
+    currentSlide = (currentSlide + 1) % slides.length;
+    showSlide(currentSlide);
 });
 
 prevButton.addEventListener('click', () => {
-    carouselIndex = (carouselIndex - 1 + slides.length) % slides.length;
-    showSlide(carouselIndex);
+    currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+    showSlide(currentSlide);
 });
 
-// Initialize the first slide
-showSlide(carouselIndex);
+// Auto slide
+setInterval(() => {
+    currentSlide = (currentSlide + 1) % slides.length;
+    showSlide(currentSlide);
+}, 5000);
+
+// Initialize first slide
+showSlide(currentSlide);
