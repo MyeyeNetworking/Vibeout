@@ -1,29 +1,23 @@
-let currentSlide = 0;
-const slides = document.querySelectorAll('.slide');
-const nextButton = document.querySelector('.next');
-const prevButton = document.querySelector('.prev');
+let carouselIndex = 0;
+const slides = document.querySelectorAll('.carousel-slide');
+const prevButton = document.querySelector('.carousel-prev');
+const nextButton = document.querySelector('.carousel-next');
 
 function showSlide(index) {
     slides.forEach((slide, i) => {
-        slide.classList.toggle('active', i === index);
+        slide.style.transform = `translateX(${(i - index) * 100}%)`;
     });
 }
 
 nextButton.addEventListener('click', () => {
-    currentSlide = (currentSlide + 1) % slides.length;
-    showSlide(currentSlide);
+    carouselIndex = (carouselIndex + 1) % slides.length;
+    showSlide(carouselIndex);
 });
 
 prevButton.addEventListener('click', () => {
-    currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-    showSlide(currentSlide);
+    carouselIndex = (carouselIndex - 1 + slides.length) % slides.length;
+    showSlide(carouselIndex);
 });
 
-// Auto slide
-setInterval(() => {
-    currentSlide = (currentSlide + 1) % slides.length;
-    showSlide(currentSlide);
-}, 5000);
-
-// Initialize first slide
-showSlide(currentSlide);
+// Initialize the first slide
+showSlide(carouselIndex);
