@@ -5,7 +5,14 @@ body {
     padding: 0;
     color: #333;
     line-height: 1.6;
+    background-image: url('your-background-image.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
+
+/* Additional CSS remains unchanged */
+
 
 header {
     background-color: #fff;
