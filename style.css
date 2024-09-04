@@ -11,17 +11,22 @@ header {
     background-color: #fff;
     padding: 10px 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    position: sticky;
-    top: 0;
-    z-index: 1000;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
 
 .logo {
     font-size: 1.5em;
     font-weight: bold;
+}
+
+/* Navigation Styles */
+nav {
+    position: relative;
 }
 
 .nav-menu {
@@ -64,19 +69,21 @@ header {
     display: block;
 }
 
+.hamburger {
+    display: none;
+    font-size: 1.8em;
+    cursor: pointer;
+}
+
 /* Hero Slider Styles */
 .carousel {
     position: relative;
     overflow: hidden;
-    width: 100%;
-    display: flex;
-    align-items: center;
     margin-bottom: 50px;
 }
 
 .carousel-slide {
-    min-width: 100%;
-    transition: transform 0.5s ease-in-out;
+    display: none;
     position: relative;
 }
 
@@ -86,16 +93,20 @@ header {
     display: block;
 }
 
+.carousel-slide.active {
+    display: block;
+}
+
 .carousel-title {
     position: absolute;
-    top: 10px;
+    bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
-    background-color: rgba(0, 0, 0, 0.7);
-    padding: 10px 45%;
-    border-radius: 20px;
-    color: #fff;
-    font-size: 1.2em;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    border-radius: 10px;
+    font-size: 2em;
+    color: white;
 }
 
 .carousel-prev, .carousel-next {
@@ -108,7 +119,6 @@ header {
     padding: 10px;
     cursor: pointer;
     font-size: 1.5em;
-    z-index: 1000;
 }
 
 .carousel-prev {
@@ -118,7 +128,6 @@ header {
 .carousel-next {
     right: 10px;
 }
-
 
 /* Product Section Styles */
 .products {
@@ -183,17 +192,23 @@ footer {
 }
 
 @media (max-width: 768px) {
-    .hero-slider {
-        height: 50vh;
-    }
-
-    .product-grid {
-        flex-direction: column;
-        align-items: center;
-    }
-
     .nav-menu {
+        display: none;
         flex-direction: column;
         gap: 10px;
+        background-color: #fff;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .nav-menu.active {
+        display: flex;
+    }
+
+    .hamburger {
+        display: block;
     }
 }
