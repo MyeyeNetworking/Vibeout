@@ -4,40 +4,32 @@ const nextButton = document.querySelector('.carousel-next');
 const prevButton = document.querySelector('.carousel-prev');
 const slideInterval = 5000; // Time in milliseconds (5 seconds)
 
+let carouselIndex = 0;
+const slides = document.querySelectorAll('.carousel-slide');
+const prevButton = document.querySelector('.carousel-prev');
+const nextButton = document.querySelector('.carousel-next');
+
 function showSlide(index) {
     slides.forEach((slide, i) => {
-        slide.classList.toggle('active', i === index);
+        slide.style.transform = `translateX(${(i - index) * 100}%)`;
     });
 }
 
-// Move to the next slide
-function nextSlide() {
-    currentSlide = (currentSlide + 1) % slides.length;
-    showSlide(currentSlide);
-}
-
-// Move to the previous slide
-function prevSlide() {
-    currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-    showSlide(currentSlide);
-}
-
-// Auto slide functionality
-setInterval(nextSlide, slideInterval);
-
-// Initialize first slide
-showSlide(currentSlide);
-
-// Hamburger menu toggle
-const hamburger = document.getElementById('hamburger');
-const navMenu = document.getElementById('nav-menu');
-
-hamburger.addEventListener('click', () => {
-    navMenu.classList.toggle('active');
+nextButton.addEventListener('click', () => {
+    carouselIndex = (carouselIndex + 1) % slides.length;
+    showSlide(carouselIndex);
 });
 
+prevButton.addEventListener('click', () => {
+    carouselIndex = (carouselIndex - 1 + slides.length) % slides.length;
+    showSlide(carouselIndex);
+});
+
+// Initialize the first slide
+showSlide(carouselIndex);
+
+
 // Auto slide functionality
 setInterval(nextSlide, slideInterval);
 
-// Initialize first slide
-showSlide(currentSlide);
+
