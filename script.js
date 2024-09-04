@@ -20,5 +20,12 @@ prevButton.addEventListener('click', () => {
     showSlide(carouselIndex);
 });
 
-// Initialize the first slide
-showSlide(carouselIndex);
+// Event listeners for manual navigation
+nextButton.addEventListener('click', nextSlide);
+prevButton.addEventListener('click', prevSlide);
+
+// Auto slide functionality
+setInterval(nextSlide, slideInterval);
+
+// Initialize first slide
+showSlide(currentSlide);
