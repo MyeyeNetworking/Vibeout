@@ -3,19 +3,14 @@ body {
     font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
-    color: #333;
+    color: #fff; /* Updated to contrast with the dark background */
     line-height: 1.6;
-    background-image: url('image/back3.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+    background-color: #333; /* Set background to #333 */
 }
 
-/* Additional CSS remains unchanged */
-
-
+/* Header Styles */
 header {
-    background-color: #fff;
+    background-color: #333;
     padding: 10px 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     display: flex;
@@ -25,6 +20,9 @@ header {
     top: 0;
     z-index: 1000;
 }
+
+/* Other styles remain unchanged */
+
 
 .logo {
     font-size: 1.5em;
@@ -174,7 +172,7 @@ nav {
 
 /* Footer Styles */
 footer {
-    background-color: #f8f8f8;
+    background-color: #333;
     padding: 20px;
     text-align: center;
 }
