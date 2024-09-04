@@ -1,33 +1,24 @@
-let currentSlide = 0;
-const slides = document.querySelectorAll('.slide');
-const nextButton = document.querySelector('.next');
-const prevButton = document.querySelector('.prev');
+let carouselIndex = 0;
+const slides = document.querySelectorAll('.carousel-slide');
+const prevButton = document.querySelector('.carousel-prev');
+const nextButton = document.querySelector('.carousel-next');
 const slideInterval = 5000; // Time in milliseconds (5 seconds)
 
 function showSlide(index) {
     slides.forEach((slide, i) => {
-        slide.classList.toggle('active', i === index);
+        slide.style.transform = `translateX(${(i - index) * 100}%)`;
     });
 }
 
-// Move to the next slide
-function nextSlide() {
-    currentSlide = (currentSlide + 1) % slides.length;
-    showSlide(currentSlide);
-}
+nextButton.addEventListener('click', () => {
+    carouselIndex = (carouselIndex + 1) % slides.length;
+    showSlide(carouselIndex);
+});
 
-// Move to the previous slide
-function prevSlide() {
-    currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-    showSlide(currentSlide);
-}
+prevButton.addEventListener('click', () => {
+    carouselIndex = (carouselIndex - 1 + slides.length) % slides.length;
+    showSlide(carouselIndex);
+});
 
-// Event listeners for manual navigation
-nextButton.addEventListener('click', nextSlide);
-prevButton.addEventListener('click', prevSlide);
-
-// Auto slide functionality
-setInterval(nextSlide, slideInterval);
-
-// Initialize first slide
-showSlide(currentSlide);
+// Initialize the first slide
+showSlide(carouselIndex);
