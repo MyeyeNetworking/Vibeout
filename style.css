@@ -66,7 +66,6 @@ header {
 
 /* Hero Slider Styles */
 .hero-slider {
-    position: FIXED;
     height: 60vh;
     overflow: hidden;
     margin-bottom: 50px;
@@ -142,4 +141,81 @@ header {
 
 .product-card {
     border: 1px solid #ddd;
-    padding:
+    padding: 20px;
+    width: calc(33.333% - 40px);
+    box-sizing: border-box;
+}
+
+/* Footer Styles */
+footer {
+    background-color: #f8f8f8;
+    padding: 20px;
+    text-align: center;
+}
+
+footer .newsletter {
+    margin-bottom: 10px;
+}
+
+footer .newsletter form {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+footer .newsletter input {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+footer .newsletter button {
+    padding: 10px 20px;
+    border: none;
+    background-color: #333;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Responsive Styles */
+@media only screen and (max-width: 425px) {
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .nav-menu {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .carousel-title {
+        font-size: 1em;
+        padding: 5px 10px;
+        border-radius: 10px;
+    }
+
+    .carousel-prev, .carousel-next {
+        font-size: 1em;
+        padding: 5px;
+    }
+
+    .product-grid {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .product-card {
+        width: 100%;
+    }
+
+    footer .newsletter form {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    footer .newsletter input {
+        width: 100%;
+    }
+}
