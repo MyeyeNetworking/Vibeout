@@ -109,76 +109,7 @@ header {
     top: 50%;
     transform: translateY(-50%);
     background-color: rgba(0, 0, 0, 0.5);
-    color: white;
-    border: none;
-    padding: 10px;
-    cursor: pointer;
-    font-size: 1.5em;
-    z-index: 1000;
-}
-
-.carousel-prev {
-    left: 10px;
-}
-
-.carousel-next {
-    right: 10px;
-}
-
-
-/* Product Section Styles */
-.products {
-    padding: 20px;
-    text-align: center;
-}
-
-.product-grid {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    flex-wrap: wrap;
-}
-
-.product-card {
-    border: 1px solid #ddd;
-    padding: 20px;
-    width: calc(33.333% - 40px);
-    box-sizing: border-box;
-}
-
-/* Footer Styles */
-footer {
-    background-color: #f8f8f8;
-    padding: 20px;
-    text-align: center;
-}
-
-footer .newsletter {
-    margin-bottom: 10px;
-}
-
-footer .newsletter form {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-}
-
-footer .newsletter input {
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-}
-
-footer .newsletter button {
-    padding: 10px 20px;
-    border: none;
-    background-color: #333;
-    color: white;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-/* Responsive Styles */
+/* Responsive Styles for Screens 425px and Smaller */
 @media only screen and (max-width: 425px) {
     header {
         flex-direction: column;
@@ -191,14 +122,14 @@ footer .newsletter button {
     }
 
     .carousel-title {
-        font-size: 1em;
+        font-size: 0.9em;
         padding: 5px 10px;
         border-radius: 10px;
     }
 
     .carousel-prev, .carousel-next {
-        font-size: 1em;
-        padding: 5px;
+        font-size: 1.2em;
+        padding: 10px;
     }
 
     .product-grid {
@@ -219,3 +150,7 @@ footer .newsletter button {
         width: 100%;
     }
 }
+
+
+
+    
