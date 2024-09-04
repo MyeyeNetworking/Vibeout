@@ -66,7 +66,7 @@ header {
 
 /* Hero Slider Styles */
 .hero-slider {
-    position: relative;
+    position: FIXED;
     height: 60vh;
     overflow: hidden;
     margin-bottom: 50px;
