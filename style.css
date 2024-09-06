@@ -252,3 +252,57 @@ footer {
     font-size: 1.5em;
     border-radius: 0 0 10px 10px;
 }
+
+/* Hide dropdown and nav for mobile by default */
+.nav-menu {
+    display: none; /* Hidden on mobile initially */
+}
+
+.nav-menu li {
+    position: relative;
+}
+
+.dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #fff;
+    padding: 10px;
+    list-style: none;
+}
+
+/* Toggle the menu for mobile */
+.menu-toggle {
+    display: none;
+    font-size: 1.5em;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: block; /* Visible on mobile */
+    }
+
+    .nav-menu {
+        position: absolute;
+        top: 100%;
+        width: 100%;
+        left: 0;
+        background-color: white;
+        display: none; /* Initially hidden */
+        flex-direction: column;
+    }
+
+    .nav-menu.active {
+        display: flex; /* Show on mobile when active */
+    }
+
+    .nav-menu li:hover .dropdown {
+        display: none; /* Disable hover behavior on mobile */
+    }
+
+    .nav-menu li.active .dropdown {
+        display: block; /* Show dropdown when clicked */
+    }
+}
