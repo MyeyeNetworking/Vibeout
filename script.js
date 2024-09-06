@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const offset = -currentIndex * 100;
         slideshowContainer.style.transform = `translateX(${offset}%)`;
     }
+    
 
     function showNextSlide() {
         currentIndex = (currentIndex + 1) % slides.length;
