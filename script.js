@@ -31,5 +31,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
+const menuToggle = document.querySelector('.menu-toggle');
+const navMenu = document.querySelector('.nav-menu');
+const dropdownToggles = document.querySelectorAll('.nav-menu li > a');
+
+menuToggle.addEventListener('click', () => {
+    navMenu.classList.toggle('active');
+});
+
+dropdownToggles.forEach(toggle => {
+    toggle.addEventListener('click', (e) => {
+        e.preventDefault(); // Prevent navigation
+        const parentLi = toggle.parentElement;
+        parentLi.classList.toggle('active');
+    });
+});
 
 
