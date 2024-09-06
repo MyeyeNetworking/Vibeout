@@ -1,24 +1,24 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const carouselContainer = document.querySelector('.carousel-container');
-    const slides = document.querySelectorAll('.carousel-slide');
-    const prevButton = document.querySelector('.carousel-prev');
-    const nextButton = document.querySelector('.carousel-next');
+    const slideshowContainer = document.querySelector('.slideshow-container');
+    const slides = document.querySelectorAll('.slideshow-slide');
+    const prevButton = document.querySelector('.slideshow-prev');
+    const nextButton = document.querySelector('.slideshow-next');
     
     let currentIndex = 0;
 
-    function updateCarousel() {
+    function updateSlideshow() {
         const offset = -currentIndex * 100;
-        carouselContainer.style.transform = `translateX(${offset}%)`;
+        slideshowContainer.style.transform = `translateX(${offset}%)`;
     }
 
     function showNextSlide() {
         currentIndex = (currentIndex + 1) % slides.length;
-        updateCarousel();
+        updateSlideshow();
     }
 
     function showPrevSlide() {
         currentIndex = (currentIndex - 1 + slides.length) % slides.length;
-        updateCarousel();
+        updateSlideshow();
     }
 
     prevButton.addEventListener('click', showPrevSlide);
@@ -27,6 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Optional: Auto-slide functionality
     setInterval(showNextSlide, 3000); // Change slide every 3 seconds
 });
+
 
 
 // Hamburger menu toggle
