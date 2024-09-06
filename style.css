@@ -269,11 +269,16 @@ footer {
     display: none;
     position: absolute;
     top: 100%;
-    left: 0;
+    left: 0; /* Ensure it aligns with the parent element */
+    right: auto; /* Prevents alignment issues */
     background-color: #fff;
-    padding: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     list-style: none;
+    padding: 10px;
+    z-index: 1000;
+    width: max-content; /* Adjusts width to fit the content */
 }
+
 
 /* Toggle the menu for mobile */
 .menu-toggle {
