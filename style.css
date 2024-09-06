@@ -280,38 +280,56 @@ footer {
 }
 
 
-/* Toggle the menu for mobile */
+/* Mobile styles */
 .menu-toggle {
     display: none;
-    font-size: 1.5em;
+    font-size: 2em;
+    background-color: transparent;
+    border: none;
     cursor: pointer;
+    position: absolute;
+    top: 15px;
+    right: 15px;
 }
 
 @media (max-width: 768px) {
     .menu-toggle {
-        display: block; /* Visible on mobile */
+        display: block;
     }
 
     .nav-menu {
+        display: none;
+        flex-direction: column;
+        width: 129px;
         position: absolute;
-        top: 129px;
-        width: 100%;
+        top: 60px;
         left: -151px;
         background-color: white;
-        display: none; /* Initially hidden */
-        flex-direction: column;
     }
 
     .nav-menu.active {
-        display: flex; /* Show on mobile when active */
+        display: flex;
     }
 
-    .nav-menu li:hover .dropdown {
-        display: none; /* Disable hover behavior on mobile */
+    .nav-menu li {
+        width: 100%;
+        text-align: left;
+        padding: 10px 20px;
+        border-bottom: 1px solid #ddd;
     }
 
-    .nav-menu li.active .dropdown {
-        display: block; /* Show dropdown when clicked */
+    .dropdown {
+        display: none;
+        flex-direction: column;
+        padding-left: 20px;
+        background-color: #f9f9f9;
+    }
+
+    .dropdown li {
+        border: none;
+    }
+
+    .dropdown.active {
+        display: flex;
     }
 }
-
