@@ -12,7 +12,6 @@ body {
 }
 
 
-
 /* Additional CSS remains unchanged */
 
 
@@ -33,82 +32,49 @@ header {
     font-weight: bold;
 }
 
-.menu-toggle {
-    font-size: 2em;
-    cursor: pointer;
-    color: white;
-    display: none;
+/* Navigation Styles */
+nav {
+    position: relative;
 }
 
-/* Navigation */
 .nav-menu {
     list-style: none;
     display: flex;
-    margin: 0;
-    padding: 0;
+    gap: 20px;
+}
+
+.nav-menu a {
+    text-decoration: none;
+    color: #333;
+    position: relative;
 }
 
 .nav-menu li {
     position: relative;
-    margin-left: 20px;
 }
 
-.nav-menu a {
-    color: white;
-    text-decoration: none;
-    padding: 10px;
-}
-
-.nav-menu .dropdown {
+.dropdown {
     display: none;
     position: absolute;
     top: 100%;
     left: 0;
-    background-color: #444;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     list-style: none;
-    padding: 0;
+    padding: 10px 0;
+    z-index: 1000;
+}
+
+.dropdown li {
+    padding: 10px 20px;
+}
+
+.dropdown li a {
+    color: #333;
 }
 
 .nav-menu li:hover .dropdown {
     display: block;
-}
-
-.nav-menu .dropdown li {
-    margin: 0;
-}
-
-.nav-menu .dropdown a {
-    padding: 10px;
-    display: block;
-}
-
-/* Mobile view */
-@media (max-width: 768px) {
-    .menu-toggle {
-        display: block;
-    }
-
-    .nav-menu {
-        display: none;
-        flex-direction: column;
-        width: 100%;
-        background-color: #333;
-        position: absolute;
-        top: 100%;
-        left: 0;
-    }
-
-    .nav-menu li {
-        margin-left: 0;
-    }
-
-    .nav-menu.active {
-        display: flex;
-    }
-
-    .nav-menu .dropdown {
-        position: static;
-    }
 }
 
 
