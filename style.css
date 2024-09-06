@@ -57,7 +57,7 @@ nav {
     display: none;
     position: absolute;
     top: 100%;
-    left: 0; /* Ensure it aligns with the parent element */
+    left: -150; /* Ensure it aligns with the parent element */
     right: auto; /* Prevents alignment issues */
     background-color: #fff;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
