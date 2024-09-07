@@ -57,14 +57,7 @@ menuToggle.addEventListener('click', () => {
     navMenu.classList.toggle('active');
 });
 
-// Close the mobile menu when a link is clicked
-navLinks.forEach(link => {
-    link.addEventListener('click', () => {
-        if (navMenu.classList.contains('active')) {
-            navMenu.classList.remove('active');
-        }
-    });
-});
+
 
 
 
