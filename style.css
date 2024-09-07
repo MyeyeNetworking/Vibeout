@@ -347,3 +347,19 @@ footer {
     text-align: center;
 }
 
+
+#genra-section {
+    display: flex;
+    flex-direction: column;
+}
+
+.genra-row {
+    display: flex;
+}
+
+.genra-row img {
+    width: 50%; /* Adjust depending on the number of images per row */
+    margin: 0; /* Remove any spacing */
+    padding: 0; /* No padding */
+}
+
