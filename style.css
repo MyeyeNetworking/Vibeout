@@ -300,9 +300,9 @@ footer {
     .nav-menu {
         display: none;
         flex-direction: column;
-        width: 129px;
+        width: 131px;
         position: absolute;
-        top: 60px;
+        top: 1px;
         left: -151px;
         background-color: white;
     }
