@@ -49,9 +49,16 @@ dropdownToggles.forEach(toggle => {
 
 
 
+const genraLink = document.querySelector('.genra-link');
+const genraSection = document.querySelector('#genra-section');
+const otherSections = document.querySelectorAll('section');
 
-
-document.querySelector('.genra-link').addEventListener('click', function(e) {
+genraLink.addEventListener('click', (e) => {
     e.preventDefault();
-    document.querySelector('#genra-section').scrollIntoView({ behavior: 'smooth' });
+    
+    // Hide all sections except Genra
+    otherSections.forEach(section => section.classList.add('hidden'));
+    
+    // Show Genra section
+    genraSection.classList.remove('hidden');
 });
