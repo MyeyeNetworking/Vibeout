@@ -48,8 +48,44 @@ dropdownToggles.forEach(toggle => {
 });
 
 
-document.querySelector('.genra-link').addEventListener('click', function(e) {
+const menuToggle = document.querySelector('.menu-toggle');
+const navMenu = document.querySelector('.nav-menu');
+const menuLinks = document.querySelectorAll('.nav-menu a');
+
+// Toggle the mobile menu
+menuToggle.addEventListener('click', () => {
+    navMenu.classList.toggle('active');
+});
+
+// Close the mobile menu when a link is clicked
+menuLinks.forEach(link => {
+    link.addEventListener('click', () => {
+        // Close the dropdown menu
+        navMenu.classList.remove('active');
+
+        // If the link has a dropdown, close it
+        const dropdown = link.nextElementSibling;
+        if (dropdown && dropdown.classList.contains('dropdown')) {
+            dropdown.classList.remove('active');
+        }
+    });
+});
+
+// Show the Genra section when the Genra link is clicked
+const genraLink = document.querySelector('.genra-link');
+const genraSection = document.querySelector('#genra-section');
+const allSections = document.querySelectorAll('section');
+
+genraLink.addEventListener('click', (e) => {
     e.preventDefault();
-    document.querySelector('#genra-section').scrollIntoView({ behavior: 'smooth' });
+
+    // Hide all sections
+    allSections.forEach(section => section.classList.add('hidden'));
+
+    // Show Genra section
+    genraSection.classList.remove('hidden');
+
+    // Scroll to the Genra section
+    genraSection.scrollIntoView({ behavior: 'smooth' });
 });
 
