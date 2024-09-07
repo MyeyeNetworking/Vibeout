@@ -62,3 +62,26 @@ genraLink.addEventListener('click', (e) => {
     // Show Genra section
     genraSection.classList.remove('hidden');
 });
+
+const menuToggle = document.querySelector('.menu-toggle');
+const navMenu = document.querySelector('.nav-menu');
+const genraLink = document.querySelector('.genra-link');
+const genraSection = document.querySelector('#genra-section');
+const allSections = document.querySelectorAll('section');
+
+// Toggle the mobile menu
+menuToggle.addEventListener('click', () => {
+    navMenu.classList.toggle('active');
+});
+
+// Show the Genra section when the Genra link is clicked
+genraLink.addEventListener('click', (e) => {
+    e.preventDefault();
+
+    // Hide all sections
+    allSections.forEach(section => section.classList.add('hidden'));
+
+    // Show Genra section
+    genraSection.classList.remove('hidden');
+});
+
