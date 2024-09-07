@@ -89,3 +89,8 @@ genraLink.addEventListener('click', (e) => {
     genraSection.scrollIntoView({ behavior: 'smooth' });
 });
 
+
+document.querySelector('.genra-link').addEventListener('click', function(e) {
+    e.preventDefault();
+    document.querySelector('#genra-section').scrollIntoView({ behavior: 'smooth' });
+});
