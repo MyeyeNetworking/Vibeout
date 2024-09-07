@@ -31,6 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
+
 const menuToggle = document.querySelector('.menu-toggle');
 const navMenu = document.querySelector('.nav-menu');
 const dropdownToggles = document.querySelectorAll('.nav-menu li > a');
