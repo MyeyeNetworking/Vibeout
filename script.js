@@ -85,8 +85,4 @@ genraLink.addEventListener('click', (e) => {
     genraSection.classList.remove('hidden');
 });
 
-document.querySelector('.genra-link').addEventListener('click', function(e) {
-    e.preventDefault();
-    document.querySelector('#genra-section').classList.remove('hidden');
-    document.querySelector('#genra-section').scrollIntoView({ behavior: 'smooth' });
-});
+
