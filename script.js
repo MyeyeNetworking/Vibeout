@@ -46,18 +46,3 @@ dropdownToggles.forEach(toggle => {
         parentLi.classList.toggle('active');
     });
 });
-
-
-const menuToggle = document.querySelector('.menu-toggle');
-const navMenu = document.querySelector('.nav-menu');
-const navLinks = document.querySelectorAll('.nav-menu a');
-
-// Toggle the mobile menu
-menuToggle.addEventListener('click', () => {
-    navMenu.classList.toggle('active');
-});
-
-
-
-
-
