@@ -48,6 +48,7 @@ dropdownToggles.forEach(toggle => {
 });
 
 
+
 const genraLink = document.querySelector('.genra-link');
 const genraSection = document.querySelector('#genra-section');
 const otherSections = document.querySelectorAll('section');
