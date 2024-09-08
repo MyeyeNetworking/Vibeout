@@ -51,13 +51,3 @@ dropdownToggles.forEach(toggle => {
 
 
 
-// Show the Genra section when the Genra link is clicked
-genraLink.addEventListener('click', (e) => {
-    e.preventDefault();
-
-    // Hide all sections
-    allSections.forEach(section => section.classList.add('hidden'));
-
-    // Show Genra section
-    genraSection.classList.remove('hidden');
-});
