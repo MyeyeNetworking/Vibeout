@@ -435,3 +435,57 @@ footer {
 .genra-row img {
     width: 50%;
 }
+
+  
+  /* styles.css */
+
+/* Styles for the Promote Your Event section */
+#promote {
+    background-color: #f4f4f4;
+    padding: 20px;
+    max-width: 800px;
+    margin: auto;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#promote h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#promote form {
+    display: flex;
+    flex-direction: column;
+}
+
+#promote form label {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+#promote form input,
+#promote form textarea {
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+#promote form input[type="file"] {
+    border: none;
+}
+
+#promote form button {
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+#promote form button:hover {
+    background-color: #0056b3;
+}
