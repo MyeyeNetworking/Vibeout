@@ -88,54 +88,35 @@ document.getElementById('event-form').addEventListener('submit', function(e) {
 });
 
 
+document.getElementById('event-form').addEventListener('submit', function(event) {
+    event.preventDefault();
 
+    const eventName = document.getElementById('event-name').value;
+    const eventDate = new Date(document.getElementById('event-date').value);
+    const eventLocation = document.getElementById('event-location').value;
+    const eventDescription = document.getElementById('event-description').value;
+    
+    const currentDate = new Date();
+    const sevenDaysLater = new Date();
+    sevenDaysLater.setDate(currentDate.getDate() + 7);
+    
+    const eventData = {
+        name: eventName,
+        date: eventDate,
+        location: eventLocation,
+        description: eventDescription
+    };
 
-document.addEventListener('DOMContentLoaded', function () {
-    const form = document.getElementById('event-form');
-    const featuredEvents = document.querySelector('.product-grid'); // This is where new events will be added
+    let events = JSON.parse(localStorage.getItem('events')) || { featured: [], upcoming: [] };
 
-    form.addEventListener('submit', function (event) {
-        event.preventDefault(); // Prevent the default form submission
+    if (eventDate <= sevenDaysLater) {
+        events.featured.push(eventData);
+    } else {
+        events.upcoming.push(eventData);
+    }
 
-        const eventName = document.getElementById('event-name').value;
-        const eventDate = new Date(document.getElementById('event-date').value);
-        const eventLocation = document.getElementById('event-location').value;
-        const eventFlyer = document.getElementById('event-flyer').files[0]; // Assumes only one file is uploaded
-        const eventDescription = document.getElementById('event-description').value;
-
-        // Check if the event date is within the next week or today
-        const today = new Date();
-        const oneWeekFromNow = new Date();
-        oneWeekFromNow.setDate(today.getDate() + 7);
-
-        if (eventDate >= today && eventDate <= oneWeekFromNow) {
-            // Create a new event card
-            const eventCard = document.createElement('div');
-            eventCard.classList.add('product-card');
-
-            // Create and append the flyer image
-            const flyerImg = document.createElement('img');
-            flyerImg.src = URL.createObjectURL(eventFlyer); // Display the uploaded flyer
-            flyerImg.alt = eventName;
-            eventCard.appendChild(flyerImg);
-
-            // Create and append the event name
-            const eventNameElem = document.createElement('h3');
-            eventNameElem.textContent = eventName;
-            eventCard.appendChild(eventNameElem);
-
-            // Create and append the event description
-            const eventDescElem = document.createElement('p');
-            eventDescElem.textContent = eventDescription;
-            eventCard.appendChild(eventDescElem);
-
-            // Append the new event card to the featured events section
-            featuredEvents.appendChild(eventCard);
-
-            // Optionally, clear the form fields
-            form.reset();
-        } else {
-            alert('Event date must be within one week or today.');
-        }
-    });
+    localStorage.setItem('events', JSON.stringify(events));
+    
+    alert('Event submitted successfully!');
+    // Optionally, you can clear the form fields here
 });
