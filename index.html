@@ -1,14 +1,4 @@
 <!DOCTYPE html>
-<html lang="en" >
-<head>
-  <meta charset="UTF-8">
-  <title>CodePen - Untitled</title>
-  <link rel="stylesheet" href="./style.css">
-
-</head>
-<body>
-<!-- partial:index.partial.html -->
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -25,6 +15,7 @@
         <ul class="nav-menu">
             <li><a href="#" data-page="home">Home</a></li>
             <li><a href="#" data-page="genra">Genra</a></li>
+            <li><a href="#" data-page="promote">Promote an Event</a></li>
         </ul>
     </nav>
 </header>
@@ -73,15 +64,16 @@
                 </div>
             </div>
         </section>
-      <section class="video-section">
-    <div class="video-container">
-        <video src="your-video.mp4" controls></video>
-        <div class="video-title">Your Video Title</div>
-    </div>
-</section>
+
+        <section class="video-section">
+            <div class="video-container">
+                <video src="your-video.mp4" controls></video>
+                <div class="video-title">Your Video Title</div>
+            </div>
+        </section>
     </section>
 
-    <!-- Genra Section (Hidden) -->
+    <!-- Genra Section -->
     <section id="genra" class="page-section">
         <div class="genra-content">
             <h2>Welcome to Genra</h2>
@@ -95,6 +87,29 @@
             <img src="image/reggae (1).jpg" alt="REGGAE">
             <img src="image/retro.jpg" alt="RETRO">
         </div>
+    </section>
+
+    <!-- Promote Event Section -->
+    <section id="promote" class="page-section">
+        <h2>Promote Your Event</h2>
+        <form id="event-form">
+            <label for="event-name">Event Name:</label>
+            <input type="text" id="event-name" name="event-name" required>
+
+            <label for="event-date">Event Date:</label>
+            <input type="date" id="event-date" name="event-date" required>
+
+            <label for="event-location">Event Location:</label>
+            <input type="text" id="event-location" name="event-location" required>
+
+            <label for="event-flyer">Upload Event Flyer (Max 2):</label>
+            <input type="file" id="event-flyer" name="event-flyer" accept="image/*" multiple required>
+
+            <label for="event-description">Description:</label>
+            <textarea id="event-description" name="event-description" rows="5" required></textarea>
+
+            <button type="submit">Submit Event</button>
+        </form>
     </section>
 </main>
 
@@ -110,10 +125,5 @@
 </footer>
 
 <script src="scripts.js"></script>
-</body>
-</html>
-<!-- partial -->
-  <script  src="./script.js"></script>
-
 </body>
 </html>
