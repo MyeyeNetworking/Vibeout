@@ -363,3 +363,75 @@ footer {
     padding: 0; /* No padding */
 }
 
+/* Page Section Styling */
+.page-section {
+    display: none; /* Hide all sections by default */
+    padding: 1px 1px; /* Add padding to make it look good */
+    background-color: #f4f4f4; /* Optional: background color */
+}
+
+.page-section.active {
+    display: block; /* Show the section that has the .active class */
+}
+
+/* Responsive Styling */
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 2em;
+    }
+
+    .hero p {
+        font-size: 1.2em;
+    }
+
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+        display: none;
+    }
+
+    nav ul.active {
+        display: flex;
+    }
+
+    nav ul li {
+        margin: 10px 0;
+    }
+
+    #cta-button {
+        font-size: 0.9em;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero h1 {
+        font-size: 1.5em;
+    }
+  
+  .nav-menu {
+    display: none;
+}
+
+.nav-menu.active {
+    display: block;
+}
+
+.page-section {
+    display: none;
+}
+
+.page-section.active {
+    display: block;
+}
+
+.genra-row {
+    display: flex;
+}
+
+.genra-row img {
+    width: 50%;
+}
