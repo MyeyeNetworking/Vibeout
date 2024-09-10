@@ -52,3 +52,37 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+
+
+// scripts.js
+
+// Function to handle the form submission
+document.getElementById('event-form').addEventListener('submit', function(e) {
+    e.preventDefault(); // Prevent the default form submission
+    
+    // Get form values
+    const eventName = document.getElementById('event-name').value;
+    const eventDate = document.getElementById('event-date').value;
+    const eventLocation = document.getElementById('event-location').value;
+    const eventDescription = document.getElementById('event-description').value;
+    const eventFlyer = document.getElementById('event-flyer').files;
+
+    // Validate file upload (Max 2 files)
+    if (eventFlyer.length > 2) {
+        alert('Please upload a maximum of 2 flyers.');
+        return;
+    }
+
+    // Example: just logging the values, you can replace this with actual form submission
+    console.log('Event Name:', eventName);
+    console.log('Event Date:', eventDate);
+    console.log('Event Location:', eventLocation);
+    console.log('Event Description:', eventDescription);
+    console.log('Uploaded Flyers:', eventFlyer);
+
+    // Reset form
+    document.getElementById('event-form').reset();
+
+    // Show a success message
+    alert('Event submitted successfully!');
+});
