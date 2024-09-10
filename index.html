@@ -1,119 +1,98 @@
 <!DOCTYPE html>
-<html lang="en" >
-<head>
-  <meta charset="UTF-8">
-  <title>CodePen - Untitled</title>
-  <link rel="stylesheet" href="./style.css">
-
-  
-</head>
-<body>
-<!-- partial:index.partial.html -->
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aqara Style Website</title>
+    <title>Website</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-   <header>
+
+<header>
     <div class="logo">Your Logo</div>
     <button class="menu-toggle">☰</button> <!-- Mobile menu toggle button -->
     <nav>
         <ul class="nav-menu">
-            </li>
-           <li><a href="#" class="genra-link">Genra</a></li>
-            <li><a href="#">Partners</a></li>
-            <li><a href="#">Support</a></li>
+            <li><a href="#" data-page="home">Home</a></li>
+            <li><a href="#" data-page="genra">Genra</a></li>
         </ul>
     </nav>
 </header>
 
-    <section class="slideshow-section">
-        <div class="slideshow">
-            <div class="slideshow-title-bar">
-                <h2>Slideshow Title</h2>
+<main>
+    <!-- Home Section -->
+    <section id="home" class="page-section active">
+        <section class="slideshow-section">
+            <div class="slideshow">
+                <div class="slideshow-title-bar">
+                    <h2>Slideshow Title</h2>
+                </div>
+                <div class="slideshow-container">
+                    <div class="slideshow-slide">
+                        <img src="image/freedom street.jpg" alt="Slide 1">
+                    </div>
+                    <div class="slideshow-slide">
+                        <img src="image/RB.jpg" alt="Slide 2">
+                    </div>
+                    <div class="slideshow-slide">
+                        <img src="image/freedom street.jpg" alt="Slide 3">
+                    </div>
+                </div>
+                <button class="slideshow-prev">❮</button>
+                <button class="slideshow-next">❯</button>
             </div>
-            <div class="slideshow-container">
-                <div class="slideshow-slide">
-                    <img src="image/freedom street.jpg" alt="Slide 1">
+        </section>
+
+        <section class="products">
+            <h2>Featured Products</h2>
+            <div class="product-grid">
+                <div class="product-card">
+                    <img src="image/freedom street.jpg" alt="Product 1">
+                    <h3>Product 1</h3>
+                    <p>Description of Product 1.</p>
                 </div>
-                <div class="slideshow-slide">
-                    <img src="image/RB.jpg" alt="Slide 2">
+                <div class="product-card">
+                    <img src="image/RB.jpg" alt="Product 2">
+                    <h3>Product 2</h3>
+                    <p>Description of Product 2.</p>
                 </div>
-                <div class="slideshow-slide">
-                    <img src="image/freedom street.jpg" alt="Slide 3">
+                <div class="product-card">
+                    <img src="product3.jpg" alt="Product 3">
+                    <h3>Product 3</h3>
+                    <p>Description of Product 3.</p>
                 </div>
             </div>
-            <button class="slideshow-prev">❮</button>
-            <button class="slideshow-next">❯</button>
-        </div>
+        </section>
     </section>
 
-    <section class="products">
-        <h2>Featured Products</h2>
-        <div class="product-grid">
-            <div class="product-card">
-                <img src="image/freedom street.jpg" alt="Product 1">
-                <h3>Product 1</h3>
-                <p>Description of Product 1.</p>
-            </div>
-            <div class="product-card">
-                <img src="image/RB.jpg" alt="Product 2">
-                <h3>Product 2</h3>
-                <p>Description of Product 2.</p>
-            </div>
-            <div class="product-card">
-                <img src="product3.jpg" alt="Product 3">
-                <h3>Product 3</h3>
-                <p>Description of Product 3.</p>
-            </div>
+    <!-- Genra Section (Hidden) -->
+    <section id="genra" class="page-section">
+        <div class="genra-content">
+            <h2>Welcome to Genra</h2>
+            <p>This is the Genra simulation page content.</p>
+        </div>
+        <div class="genra-row">
+            <img src="image/soca.jpg" alt="SOCA">
+            <img src="image/dancehall.jpg" alt="DANCEHALL">
+        </div>
+        <div class="genra-row">
+            <img src="image/reggae (1).jpg" alt="REGGAE">
+            <img src="image/retro.jpg" alt="RETRO">
         </div>
     </section>
-  <!-- Genra Section -->
-<section id="genra-section" class="hidden">
-    <div class="genra-content">
-        <h2>Welcome to Genra</h2>
-        <p>This is the Genra simulation page content.</p>
-    </div>
+</main>
 
-  <section id="genra-section" class="hidden">
-    <div class="genra-row">
-        <img src="image/soca.jpg" alt="SOCA">
-        <img src="image/dancehall.jpg" alt="DANCEHALL">
+<footer>
+    <div class="newsletter">
+        <p>Subscribe to our newsletter</p>
+        <form>
+            <input type="email" placeholder="Enter your email" required>
+            <button type="submit">Subscribe</button>
+        </form>
     </div>
-    <div class="genra-row">
-        <img src="image/reggae (1).jpg" alt="REGGAE">
-        <img src="image/retro.jpg" alt="RETRO">
-    </div>
-</section>
-  
-    <section class="video-section">
-    <div class="video-container">
-        <video src="your-video.mp4" controls></video>
-        <div class="video-title">Your Video Title</div>
-    </div>
-</section>
+    <p>&copy; 2024 Your Company Name. All Rights Reserved.</p>
+</footer>
 
-  
-    <footer>
-        <div class="newsletter">
-            <p>Subscribe to our newsletter</p>
-            <form>
-                <input type="email" placeholder="Enter your email" required>
-                <button type="submit">Subscribe</button>
-            </form>
-        </div>
-        <p>&copy; 2024 Your Company Name. All Rights Reserved.</p>
-    </footer>
-
-    <script src="scripts.js"></script>
-</body>
-</html>
-<!-- partial -->
-  <script  src="./script.js"></script>
-
+<script src="scripts.js"></script>
 </body>
 </html>
