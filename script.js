@@ -54,38 +54,11 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-// scripts.js
 
-// Function to handle the form submission
-document.getElementById('event-form').addEventListener('submit', function(e) {
-    e.preventDefault(); // Prevent the default form submission
-    
-    // Get form values
-    const eventName = document.getElementById('event-name').value;
-    const eventDate = document.getElementById('event-date').value;
-    const eventLocation = document.getElementById('event-location').value;
-    const eventDescription = document.getElementById('event-description').value;
-    const eventFlyer = document.getElementById('event-flyer').files;
 
-    // Validate file upload (Max 2 files)
-    if (eventFlyer.length > 2) {
-        alert('Please upload a maximum of 2 flyers.');
-        return;
-    }
 
-    // Example: just logging the values, you can replace this with actual form submission
-    console.log('Event Name:', eventName);
-    console.log('Event Date:', eventDate);
-    console.log('Event Location:', eventLocation);
-    console.log('Event Description:', eventDescription);
-    console.log('Uploaded Flyers:', eventFlyer);
 
-    // Reset form
-    document.getElementById('event-form').reset();
 
-    // Show a success message
-    alert('Event submitted successfully!');
-});
 
 
 document.getElementById('event-form').addEventListener('submit', function(event) {
@@ -120,3 +93,25 @@ document.getElementById('event-form').addEventListener('submit', function(event)
     alert('Event submitted successfully!');
     // Optionally, you can clear the form fields here
 });
+
+function displayFeaturedEvents() {
+    const events = JSON.parse(localStorage.getItem('events')) || { featured: [] };
+
+    const featuredContainer = document.querySelector('.events .product-grid');
+    featuredContainer.innerHTML = ''; // Clear existing content
+
+    events.featured.forEach(event => {
+        const eventCard = document.createElement('div');
+        eventCard.className = 'product-card';
+        eventCard.innerHTML = `
+            <h3>${event.name}</h3>
+            <p>Date: ${event.date.toDateString()}</p>
+            <p>Location: ${event.location}</p>
+            <p>${event.description}</p>
+        `;
+        featuredContainer.appendChild(eventCard);
+    });
+}
+
+// Call this function when the page loads
+document.addEventListener('DOMContentLoaded', displayFeaturedEvents);
