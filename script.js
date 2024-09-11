@@ -172,3 +172,18 @@ document.getElementById('event-form').addEventListener('submit', function(event)
 
     // Add your logic to handle form submission to the backend or storage
 });
+
+
+ // Handle the back button to navigate to the previous section
+    window.addEventListener('popstate', (e) => {
+        const pageId = e.state ? e.state.pageId : 'home';
+        showPage(pageId);
+
+        // Close the live chat box if it's open
+        const liveChatBox = document.getElementById('live-chat-box');
+        if (liveChatBox && liveChatBox.classList.contains('open')) {
+            liveChatBox.classList.remove('open');
+        }
+    });
+
+
