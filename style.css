@@ -517,35 +517,3 @@ footer {
 
 
 
-/* Style for the Genra section */
-.genra-row {
-    display: flex;
-    justify-content: space-around;
-    margin-bottom: 20px;
-}
-
-.genra-item {
-    text-align: center;
-}
-
-.genra-item img {
-    width: 200px;
-    height: 200px;
-    object-fit: cover;
-    border-radius: 10px;
-}
-
-/* Style for the genre titles */
-.genra-item h3 {
-    margin-top: 10px;
-    font-size: 24px;
-    color: #ff6600; /* Adjust color */
-    font-family: 'Arial', sans-serif;
-    text-transform: uppercase; /* Make text uppercase */
-    letter-spacing: 2px; /* Space between letters */
-}
-
-/* Optional: Add hover effect */
-.genra-item:hover h3 {
-    color: #ff3300; /* Change title color on hover */
-}
