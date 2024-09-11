@@ -517,3 +517,26 @@ footer {
 
 
 
+    .genra-image-container {
+    position: relative;
+    display: inline-block;
+}
+
+.genra-image-container img {
+    width: 100%;
+    height: auto;
+}
+
+.genra-title {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2em;
+    color: white;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    text-align: center;
+}
+
+
