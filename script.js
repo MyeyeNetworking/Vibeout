@@ -175,4 +175,40 @@ document.getElementById('event-form').addEventListener('submit', function(event)
 
 
 
+// JavaScript for page navigation
+const links = document.querySelectorAll('nav a');
+const sections = document.querySelectorAll('.page-section');
+
+links.forEach(link => {
+    link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const targetPage = this.getAttribute('data-page');
+
+        // Change page sections
+        sections.forEach(section => {
+            if (section.id === targetPage) {
+                section.classList.add('active');
+            } else {
+                section.classList.remove('active');
+            }
+        });
+
+        // Push the new state to the history
+        window.history.pushState({ page: targetPage }, '', '#' + targetPage);
+    });
+});
+
+// Listen for back button navigation
+window.addEventListener('popstate', function(event) {
+    const pageId = event.state?.page || 'home'; // Default to home page if no state
+    sections.forEach(section => {
+        if (section.id === pageId) {
+            section.classList.add('active');
+        } else {
+            section.classList.remove('active');
+        }
+    });
+});
+
+
 
