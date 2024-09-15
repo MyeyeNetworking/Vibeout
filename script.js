@@ -212,3 +212,60 @@ window.addEventListener('popstate', function(event) {
 
 
 
+const items = document.querySelectorAll('.slider-item');
+const prevBtn = document.querySelector('.prev-btn');
+const nextBtn = document.querySelector('.next-btn');
+let currentIndex = 0;
+let startX = 0;
+let endX = 0;
+
+// Function to show a specific item
+function showItem(index) {
+    items.forEach((item, i) => {
+        item.classList.toggle('active', i === index);
+    });
+}
+
+// Button click events
+prevBtn.addEventListener('click', () => {
+    currentIndex = (currentIndex > 0) ? currentIndex - 1 : items.length - 1;
+    showItem(currentIndex);
+});
+
+nextBtn.addEventListener('click', () => {
+    currentIndex = (currentIndex < items.length - 1) ? currentIndex + 1 : 0;
+    showItem(currentIndex);
+});
+
+// Touch events for swipe detection
+const slider = document.querySelector('.slider');
+
+// Start touch
+slider.addEventListener('touchstart', (e) => {
+    startX = e.touches[0].clientX;
+});
+
+// End touch
+slider.addEventListener('touchend', (e) => {
+    endX = e.changedTouches[0].clientX;
+    handleSwipe();
+});
+
+// Handle swipe gesture
+function handleSwipe() {
+    const swipeThreshold = 50; // Minimum swipe distance (in pixels) to trigger a slide change
+    if (endX - startX > swipeThreshold) {
+        // Swipe right (previous)
+        currentIndex = (currentIndex > 0) ? currentIndex - 1 : items.length - 1;
+        showItem(currentIndex);
+    } else if (startX - endX > swipeThreshold) {
+        // Swipe left (next)
+        currentIndex = (currentIndex < items.length - 1) ? currentIndex + 1 : 0;
+        showItem(currentIndex);
+    }
+}
+
+
+
+
+
