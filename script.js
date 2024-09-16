@@ -213,11 +213,13 @@ window.addEventListener('popstate', function(event) {
 
 
 const items = document.querySelectorAll('.slider-item');
+const items = document.querySelectorAll('.slider-item');
 const prevBtn = document.querySelector('.prev-btn');
 const nextBtn = document.querySelector('.next-btn');
 let currentIndex = 0;
 let startX = 0;
 let endX = 0;
+let isMoving = false; // Prevent multiple clicks during animation
 
 // Function to show a specific item
 function showItem(index) {
@@ -226,18 +228,26 @@ function showItem(index) {
     });
 }
 
-// Button click events
+// Button click events with infinite loop
 prevBtn.addEventListener('click', () => {
-    currentIndex = (currentIndex > 0) ? currentIndex - 1 : items.length - 1;
+    if (isMoving) return; // Prevent multiple clicks
+    isMoving = true;
+    setTimeout(() => (isMoving = false), 300); // Add delay between clicks
+
+    currentIndex = (currentIndex - 1 + items.length) % items.length;
     showItem(currentIndex);
 });
 
 nextBtn.addEventListener('click', () => {
-    currentIndex = (currentIndex < items.length - 1) ? currentIndex + 1 : 0;
+    if (isMoving) return; // Prevent multiple clicks
+    isMoving = true;
+    setTimeout(() => (isMoving = false), 300); // Add delay between clicks
+
+    currentIndex = (currentIndex + 1) % items.length;
     showItem(currentIndex);
 });
 
-// Touch events for swipe detection
+// Touch events for swipe detection with infinite loop
 const slider = document.querySelector('.slider');
 
 // Start touch
@@ -250,6 +260,21 @@ slider.addEventListener('touchend', (e) => {
     endX = e.changedTouches[0].clientX;
     handleSwipe();
 });
+
+// Handle swipe gesture with infinite loop
+function handleSwipe() {
+    const swipeThreshold = 50; // Minimum swipe distance (in pixels) to trigger a slide change
+    if (endX - startX > swipeThreshold) {
+        // Swipe right (previous)
+        currentIndex = (currentIndex - 1 + items.length) % items.length;
+        showItem(currentIndex);
+    } else if (startX - endX > swipeThreshold) {
+        // Swipe left (next)
+        currentIndex = (currentIndex + 1) % items.length;
+        showItem(currentIndex);
+    }
+}
+
 
 // Handle swipe gesture
 function handleSwipe() {
