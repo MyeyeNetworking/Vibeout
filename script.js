@@ -209,3 +209,73 @@ window.addEventListener('popstate', function(event) {
         }
     });
 });
+
+
+
+
+// Function to initialize an endless slider
+function initSlider(slider) {
+    const items = slider.querySelectorAll('.slider-item');
+    const prevBtn = slider.querySelector('.prev-btn');
+    const nextBtn = slider.querySelector('.next-btn');
+    let currentIndex = 0;
+    let startX = 0;
+    let endX = 0;
+    let isMoving = false; // Prevent multiple clicks during animation
+
+    // Function to show a specific item
+    function showItem(index) {
+        items.forEach((item, i) => {
+            item.classList.toggle('active', i === index);
+        });
+    }
+
+    // Button click events with infinite loop
+    prevBtn.addEventListener('click', () => {
+        if (isMoving) return; // Prevent multiple clicks
+        isMoving = true;
+        setTimeout(() => (isMoving = false), 300); // Add delay between clicks
+
+        currentIndex = (currentIndex - 1 + items.length) % items.length;
+        showItem(currentIndex);
+    });
+
+    nextBtn.addEventListener('click', () => {
+        if (isMoving) return; // Prevent multiple clicks
+        isMoving = true;
+        setTimeout(() => (isMoving = false), 300); // Add delay between clicks
+
+        currentIndex = (currentIndex + 1) % items.length;
+        showItem(currentIndex);
+    });
+
+    // Touch events for swipe detection with infinite loop
+    slider.addEventListener('touchstart', (e) => {
+        startX = e.touches[0].clientX;
+    });
+
+    slider.addEventListener('touchend', (e) => {
+        endX = e.changedTouches[0].clientX;
+        handleSwipe();
+    });
+
+    // Handle swipe gesture with infinite loop
+    function handleSwipe() {
+        const swipeThreshold = 50; // Minimum swipe distance (in pixels) to trigger a slide change
+        if (endX - startX > swipeThreshold) {
+            // Swipe right (previous)
+            currentIndex = (currentIndex - 1 + items.length) % items.length;
+            showItem(currentIndex);
+        } else if (startX - endX > swipeThreshold) {
+            // Swipe left (next)
+            currentIndex = (currentIndex + 1) % items.length;
+            showItem(currentIndex);
+        }
+    }
+}
+
+// Apply the function to all sliders on the page
+document.querySelectorAll('.slider').forEach(slider => {
+    initSlider(slider);
+});
+
