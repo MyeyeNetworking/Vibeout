@@ -45,7 +45,7 @@ nav {
 
 .nav-menu a {
     text-decoration: none;
-    color: #fff;
+    color: #333;
     position: relative;
 }
 
@@ -59,7 +59,7 @@ nav {
     top: 100%;
     left: -150; /* Ensure it aligns with the parent element */
     right: auto; /* Prevents alignment issues */
-    background-color: #9119;
+    background-color: #fff;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     list-style: none;
     padding: 10px;
