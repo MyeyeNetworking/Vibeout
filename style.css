@@ -16,7 +16,7 @@ body {
 
 
 header {
-    background-color: #fff;
+    background-color: #9119;
     padding: 10px 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     display: flex;
@@ -45,7 +45,7 @@ nav {
 
 .nav-menu a {
     text-decoration: none;
-    color: #333;
+    color: #fff;
     position: relative;
 }
 
@@ -59,7 +59,7 @@ nav {
     top: 100%;
     left: -150; /* Ensure it aligns with the parent element */
     right: auto; /* Prevents alignment issues */
-    background-color: #fff;
+    background-color: #9119;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     list-style: none;
     padding: 10px;
@@ -73,7 +73,7 @@ nav {
 }
 
 .dropdown li a {
-    color: #333;
+    color: #fff;
 }
 
 .nav-menu li:hover .dropdown {
