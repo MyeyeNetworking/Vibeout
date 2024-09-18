@@ -279,3 +279,27 @@ document.querySelectorAll('.slider').forEach(slider => {
     initSlider(slider);
 });
 
+
+
+
+
+
+
+
+var map = L.map('map').setView([40.7128, -74.0060], 13); // Default center (New York City)
+
+// Load map tiles from OpenStreetMap
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© OpenStreetMap contributors'
+}).addTo(map);
+
+// Add pins for locations
+var locations = [
+    [40.7128, -74.0060], // Example Location 1
+    [34.0522, -118.2437] // Example Location 2
+];
+
+locations.forEach(function(location) {
+    L.marker(location).addTo(map);
+});
+
