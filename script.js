@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const navMenu = document.querySelector('.nav-menu');
     let currentIndex = 0;
 
+    
     function updateSlideshow() {
         const offset = -currentIndex * 100;
         slideshowContainer.style.transform = `translateX(${offset}%)`;
