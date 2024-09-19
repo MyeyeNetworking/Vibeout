@@ -283,43 +283,6 @@ document.querySelectorAll('.slider').forEach(slider => {
 
 
 
-let map;
-let markers = [];
-
-function initMap() {
-    map = new google.maps.Map(document.getElementById('map'), {
-        center: { lat: 0, lng: 0 }, // Default center, you can change this
-        zoom: 2,
-        gestureHandling: 'greedy' // Allows two-finger scroll and double-tap zoom
-    });
-}
-
-// Function to add a marker
-function addMarker(location) {
-    const marker = new google.maps.Marker({
-        position: location,
-        map: map,
-    });
-    markers.push(marker);
-}
-
-// Simulate adding a marker based on event submission
-document.getElementById("event-form").addEventListener("submit", function(event) {
-    event.preventDefault();
-
-    // Get location from form input (for simplicity, assume a valid latitude/longitude is input)
-    const eventLocation = document.getElementById("event-location").value;
-
-    // Geocode location to get lat/lng (Google Maps API geocoding can be used here)
-    const geocoder = new google.maps.Geocoder();
-    geocoder.geocode({ 'address': eventLocation }, function(results, status) {
-        if (status === 'OK') {
-            map.setCenter(results[0].geometry.location);
-            addMarker(results[0].geometry.location);
-        } else {
-            alert('Geocode was not successful for the following reason: ' + status);
-        }
-    });
 // Initialize the map
 let map = L.map('map').setView([0, 0], 2); // Default view with a zoom level
 
