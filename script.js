@@ -303,3 +303,27 @@ locations.forEach(function(location) {
     L.marker(location).addTo(map);
 });
 
+
+
+
+function initMap() {
+    var map = new google.maps.Map(document.getElementById('map'), {
+        center: { lat: 40.7128, lng: -74.0060 }, // Default center
+        zoom: 8,
+        gestureHandling: "greedy", // Requires two-finger interaction for zoom/pan
+    });
+
+    // Add a pin for each event location
+    var locations = [
+        { lat: 40.7128, lng: -74.0060 }, // Example Location 1
+        { lat: 34.0522, lng: -118.2437 }  // Example Location 2
+    ];
+
+    locations.forEach(function (location) {
+        new google.maps.Marker({
+            position: location,
+            map: map
+        });
+    });
+}
+
