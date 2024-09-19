@@ -3,7 +3,7 @@ body {
     font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
-    color: #333;
+    color: #fff;
     line-height: 1.6;
     background-image: url('image/back1.jpg');
     background-size: cover;
@@ -59,7 +59,7 @@ nav {
     top: 100%;
     left: -150; /* Ensure it aligns with the parent element */
     right: auto; /* Prevents alignment issues */
-    background-color: #fff;
+    background-color: #333;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     list-style: none;
     padding: 10px;
@@ -160,7 +160,7 @@ nav {
     padding: 20px;
     width: 300px;
     text-align: center;
-    background-color: #fff;
+    background-color: #;
     transition: transform 0.3s ease;
 }
 
@@ -180,7 +180,7 @@ nav {
 
 /* Footer Styles */
 footer {
-    background-color: #f8f8f8;
+    background-color: #333;
     padding: 20px;
     text-align: center;
 }
@@ -198,7 +198,7 @@ footer {
 
 .newsletter button {
     padding: 10px 20px;
-    background-color: #333;
+    background-color: #335;
     color: white;
     border: none;
     cursor: pointer;
