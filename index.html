@@ -5,8 +5,9 @@
   <title>CodePen - Untitled</title>
   <link rel="stylesheet" href="./style.css">
 
-  <link rel="stylesheet" href="https://unpkg.com/leaflet-gesture-handling/dist/leaflet-gesture-handling.min.css" />
-<script src="https://unpkg.com/leaflet-gesture-handling"></script>
+  <label for="event-location">Event Location:</label>
+<input type="text" id="event-location" name="event-location" placeholder="Enter event address" required>
+
 
 
 
@@ -80,11 +81,10 @@
             </div>
         </section>
 
-      <div id="map" style="height: 500px; width: 100%;"></div>
-
-      <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap">
-</script>
+    <section id="event-map">
+    <h2>Event Locations</h2>
+    <div id="map" style="height: 400px;"></div>
+</section>
 
 
 
