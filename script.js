@@ -306,25 +306,27 @@ locations.forEach(function(location) {
 
 
 
+var map = L.map('map', {
+    center: [40.7128, -74.0060], // Default center (New York City)
+    zoom: 13,
+    touchZoom: false, // Disable regular touch zoom
+    gestureHandling: true, // Use the Leaflet gesture-handling plugin for 2-finger zoom
+});
 
-function initMap() {
-    var map = new google.maps.Map(document.getElementById('map'), {
-        center: { lat: 40.7128, lng: -74.0060 }, // Default center
-        zoom: 8,
-        gestureHandling: "greedy", // Requires two-finger interaction for zoom/pan
-    });
+// Load map tiles from OpenStreetMap
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© OpenStreetMap contributors'
+}).addTo(map);
 
-    // Add a pin for each event location
-    var locations = [
-        { lat: 40.7128, lng: -74.0060 }, // Example Location 1
-        { lat: 34.0522, lng: -118.2437 }  // Example Location 2
-    ];
+// Add pins for locations
+var locations = [
+    [40.7128, -74.0060], // Example Location 1
+    [34.0522, -118.2437] // Example Location 2
+];
 
-    locations.forEach(function (location) {
-        new google.maps.Marker({
-            position: location,
-            map: map
-        });
-    });
-}
+locations.forEach(function (location) {
+    L.marker(location).addTo(map);
+});
+
+
 
