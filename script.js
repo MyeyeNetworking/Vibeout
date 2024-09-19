@@ -284,46 +284,45 @@ document.querySelectorAll('.slider').forEach(slider => {
 
 
 let map;
+let markers = [];
 
 function initMap() {
-    // Initialize map centered on default location (e.g., New York City)
-    map = new google.maps.Map(document.getElementById("map"), {
-        center: { lat: 40.7128, lng: -74.0060 }, // Default location: New York City
-        zoom: 8,
-        gestureHandling: "greedy", // Enable two-finger scrolling
+    map = new google.maps.Map(document.getElementById('map'), {
+        center: { lat: 0, lng: 0 }, // Default center, you can change this
+        zoom: 2,
+        gestureHandling: 'greedy' // Allows two-finger scroll and double-tap zoom
     });
 }
 
-// Function to add marker based on the submitted location
-function addMarker(lat, lng, eventName) {
+// Function to add a marker
+function addMarker(location) {
     const marker = new google.maps.Marker({
-        position: { lat, lng },
+        position: location,
         map: map,
-        title: eventName,
     });
+    markers.push(marker);
 }
 
-// Example usage: Function to handle form submission and populate the map
-function handleFormSubmission() {
-    const eventLocation = document.getElementById("event-location").value;
-    const eventName = document.getElementById("event-name").value;
+// Simulate adding a marker based on event submission
+document.getElementById("event-form").addEventListener("submit", function(event) {
+    event.preventDefault();
 
-    // Geocode the eventLocation to get lat, lng
+    // Get location from form input (for simplicity, assume a valid latitude/longitude is input)
+    const eventLocation = document.getElementById("event-location").value;
+
+    // Geocode location to get lat/lng (Google Maps API geocoding can be used here)
     const geocoder = new google.maps.Geocoder();
-    geocoder.geocode({ address: eventLocation }, (results, status) => {
-        if (status === "OK") {
-            const location = results[0].geometry.location;
-            addMarker(location.lat(), location.lng(), eventName);
-            map.setCenter(location); // Center map to new marker location
+    geocoder.geocode({ 'address': eventLocation }, function(results, status) {
+        if (status === 'OK') {
+            map.setCenter(results[0].geometry.location);
+            addMarker(results[0].geometry.location);
         } else {
-            console.log("Geocode was not successful for the following reason: " + status);
+            alert('Geocode was not successful for the following reason: ' + status);
         }
     });
-}
-
-// Example: Bind form submission to handleFormSubmission
-document.getElementById("event-form").addEventListener("submit", function (e) {
-    e.preventDefault();
-    handleFormSubmission();
 });
+
+
+
+
 
