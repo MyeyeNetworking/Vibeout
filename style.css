@@ -209,7 +209,7 @@ footer {
         display: none;
         flex-direction: column;
         gap: 10px;
-        background-color: #fff;
+        background-color: #333;
         position: absolute;
         top: 100%;
         left: 0;
@@ -340,7 +340,7 @@ footer {
 
 #genra-section {
     padding: 20px;
-    background-color: #f0f0f0;
+    background-color: #333;
 }
 
 .genra-content {
@@ -367,7 +367,7 @@ footer {
 .page-section {
     display: none; /* Hide all sections by default */
     padding: 1px 1px; /* Add padding to make it look good */
-    background-color: #f4f4f4; /* Optional: background color */
+    background-color: #333; /* Optional: background color */
 }
 
 .page-section.active {
