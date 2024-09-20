@@ -329,3 +329,48 @@ function addPinToMap(location) {
         .catch(error => console.error('Error:', error));
 }
 
+let map;
+
+function initMap() {
+    // Initialize map centered on default location (e.g., New York City)
+    map = new google.maps.Map(document.getElementById("map"), {
+        center: { lat: 40.7128, lng: -74.0060 }, // Default location: New York City
+        zoom: 8,
+        gestureHandling: "greedy", // Enable two-finger scrolling
+    });
+}
+
+// Function to add marker based on the submitted location
+function addMarker(lat, lng, eventName) {
+    const marker = new google.maps.Marker({
+        position: { lat, lng },
+        map: map,
+        title: eventName,
+    });
+}
+
+// Example usage: Function to handle form submission and populate the map
+function handleFormSubmission() {
+    const eventLocation = document.getElementById("event-location").value;
+    const eventName = document.getElementById("event-name").value;
+
+    // Geocode the eventLocation to get lat, lng
+    const geocoder = new google.maps.Geocoder();
+    geocoder.geocode({ address: eventLocation }, (results, status) => {
+        if (status === "OK") {
+            const location = results[0].geometry.location;
+            addMarker(location.lat(), location.lng(), eventName);
+            map.setCenter(location); // Center map to new marker location
+        } else {
+            console.log("Geocode was not successful for the following reason: " + status);
+        }
+    });
+}
+
+// Example: Bind form submission to handleFormSubmission
+document.getElementById("event-form").addEventListener("submit", function (e) {
+    e.preventDefault();
+    handleFormSubmission();
+});
+
+
