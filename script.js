@@ -51,12 +51,22 @@ document.addEventListener('DOMContentLoaded', () => {
             navMenu.classList.remove('active');
         });
     });
+
+    // Initialize the map in the "event-location" section
+    if (document.getElementById('map')) {
+        const map = L.map('map').setView([51.505, -0.09], 13); // Example coordinates
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        L.marker([51.505, -0.09]).addTo(map)
+            .bindPopup('Event Location')
+            .openPopup();
+    }
 });
 
-
-
-
-
+// Event form submission and storage in localStorage
 document.getElementById('event-form').addEventListener('submit', function(event) {
     event.preventDefault();
 
@@ -64,11 +74,11 @@ document.getElementById('event-form').addEventListener('submit', function(event)
     const eventDate = new Date(document.getElementById('event-date').value);
     const eventLocation = document.getElementById('event-location').value;
     const eventDescription = document.getElementById('event-description').value;
-    
+
     const currentDate = new Date();
     const sevenDaysLater = new Date();
     sevenDaysLater.setDate(currentDate.getDate() + 7);
-    
+
     const eventData = {
         name: eventName,
         date: eventDate,
@@ -85,7 +95,7 @@ document.getElementById('event-form').addEventListener('submit', function(event)
     }
 
     localStorage.setItem('events', JSON.stringify(events));
-    
+
     alert('Event submitted successfully!');
     // Optionally, you can clear the form fields here
 });
@@ -101,7 +111,7 @@ function displayFeaturedEvents() {
         eventCard.className = 'product-card';
         eventCard.innerHTML = `
             <h3>${event.name}</h3>
-            <p>Date: ${event.date.toDateString()}</p>
+            <p>Date: ${new Date(event.date).toDateString()}</p>
             <p>Location: ${event.location}</p>
             <p>${event.description}</p>
         `;
@@ -111,11 +121,6 @@ function displayFeaturedEvents() {
 
 // Call this function when the page loads
 document.addEventListener('DOMContentLoaded', displayFeaturedEvents);
-
-
-
-
-// scripts.js
 
 // Function to handle navigation
 function showSection(sectionId) {
@@ -146,36 +151,7 @@ document.querySelectorAll('#genra .genra-row a').forEach(link => {
     });
 });
 
-
-
-
-document.getElementById('event-form').addEventListener('submit', function(event) {
-    event.preventDefault();
-
-    const eventName = document.getElementById('event-name').value;
-    const eventDate = document.getElementById('event-date').value;
-    const eventLocation = document.getElementById('event-location').value;
-    const eventCategory = document.getElementById('event-category').value;
-    const eventFlyer = document.getElementById('event-flyer').files;
-    const eventDescription = document.getElementById('event-description').value;
-
-    // Process and send event data to your backend or database
-    // Example: console.log the collected data
-    console.log({
-        eventName,
-        eventDate,
-        eventLocation,
-        eventCategory,
-        eventFlyer,
-        eventDescription
-    });
-
-    // Add your logic to handle form submission to the backend or storage
-});
-
-
-
-// JavaScript for page navigation
+// JavaScript for page navigation with history state management
 const links = document.querySelectorAll('nav a');
 const sections = document.querySelectorAll('.page-section');
 
@@ -209,9 +185,6 @@ window.addEventListener('popstate', function(event) {
         }
     });
 });
-
-
-
 
 // Function to initialize an endless slider
 function initSlider(slider) {
@@ -277,53 +250,4 @@ function initSlider(slider) {
 // Apply the function to all sliders on the page
 document.querySelectorAll('.slider').forEach(slider => {
     initSlider(slider);
-});
-
-
-
-
-
-
-
-
-function initMap() {
-    var map = new google.maps.Map(document.getElementById('map'), {
-        center: {lat: 40.7128, lng: -74.0060}, // Default center (New York City)
-        zoom: 8
-    });
-
-    // Add a pin for each event location
-    var locations = [
-        {lat: 40.7128, lng: -74.0060}, // Example Location 1
-        {lat: 34.0522, lng: -118.2437}  // Example Location 2
-    ];
-
-    locations.forEach(function(location) {
-        new google.maps.Marker({
-            position: location,
-            map: map
-        });
-    });
-}
-
-
-
-
-
-
-var map = L.map('map').setView([40.7128, -74.0060], 13); // Default center (New York City)
-
-// Load map tiles from OpenStreetMap
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '© OpenStreetMap contributors'
-}).addTo(map);
-
-// Add pins for locations
-var locations = [
-    [40.7128, -74.0060], // Example Location 1
-    [34.0522, -118.2437] // Example Location 2
-];
-
-locations.forEach(function(location) {
-    L.marker(location).addTo(map);
 });
