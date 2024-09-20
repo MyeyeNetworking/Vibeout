@@ -286,31 +286,44 @@ document.querySelectorAll('.slider').forEach(slider => {
 
 
 
-// Initialize the map
-let map = L.map('map').setView([0, 0], 2); // Default view with a zoom level
+function initMap() {
+    var map = new google.maps.Map(document.getElementById('map'), {
+        center: {lat: 40.7128, lng: -74.0060}, // Default center (New York City)
+        zoom: 8
+    });
 
-// Add OpenStreetMap tiles (free)
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: 18,
-    gestureHandling: true, // Allows two-finger scroll and zoom
-}).addTo(map);
+    // Add a pin for each event location
+    var locations = [
+        {lat: 40.7128, lng: -74.0060}, // Example Location 1
+        {lat: 34.0522, lng: -118.2437}  // Example Location 2
+    ];
 
-// Function to add markers
-function addMarker(lat, lng, description) {
-    L.marker([lat, lng]).addTo(map)
-        .bindPopup(description)
-        .openPopup();
+    locations.forEach(function(location) {
+        new google.maps.Marker({
+            position: location,
+            map: map
+        });
+    });
 }
 
-// Example: Add marker when event is submitted
-document.getElementById("event-form").addEventListener("submit", function(event) {
-    event.preventDefault();
 
-    // Get location (assume lat/lng is available)
-    const eventLocation = document.getElementById("event-location").value;
 
-    // For simplicity, assuming lat/lng values (you may use a geocoder)
-    const [lat, lng] = eventLocation.split(","); // Assume input is "latitude,longitude"
-    
-    addMarker(parseFloat(lat), parseFloat(lng), "Event Location");
+
+
+
+var map = L.map('map').setView([40.7128, -74.0060], 13); // Default center (New York City)
+
+// Load map tiles from OpenStreetMap
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© OpenStreetMap contributors'
+}).addTo(map);
+
+// Add pins for locations
+var locations = [
+    [40.7128, -74.0060], // Example Location 1
+    [34.0522, -118.2437] // Example Location 2
+];
+
+locations.forEach(function(location) {
+    L.marker(location).addTo(map);
 });
