@@ -286,50 +286,45 @@ document.querySelectorAll('.slider').forEach(slider => {
 
 
 
-}
-
-let map;
-
-function initMap() {
-    // Initialize map centered on default location (e.g., New York City)
-    map = new google.maps.Map(document.getElementById("map"), {
-        center: { lat: 40.7128, lng: -74.0060 }, // Default location: New York City
-        zoom: 8,
-        gestureHandling: "greedy", // Enable two-finger scrolling
-    });
-}
-
-// Function to add marker based on the submitted location
-function addMarker(lat, lng, eventName) {
-    const marker = new google.maps.Marker({
-        position: { lat, lng },
-        map: map,
-        title: eventName,
-    });
-}
-
-// Example usage: Function to handle form submission and populate the map
-function handleFormSubmission() {
-    const eventLocation = document.getElementById("event-location").value;
-    const eventName = document.getElementById("event-name").value;
-
-    // Geocode the eventLocation to get lat, lng
-    const geocoder = new google.maps.Geocoder();
-    geocoder.geocode({ address: eventLocation }, (results, status) => {
-        if (status === "OK") {
-            const location = results[0].geometry.location;
-            addMarker(location.lat(), location.lng(), eventName);
-            map.setCenter(location); // Center map to new marker location
-        } else {
-            console.log("Geocode was not successful for the following reason: " + status);
-        }
-    });
-}
-
-// Example: Bind form submission to handleFormSubmission
-document.getElementById("event-form").addEventListener("submit", function (e) {
-    e.preventDefault();
-    handleFormSubmission();
+// Initialize the map
+var map = L.map('map', {
+    touchZoom: false,    // Disable touch zoom by default
+    scrollWheelZoom: false, // Disable scroll zoom
+    doubleClickZoom: false, // Disable double-click zoom
 });
 
+// Set the map center and zoom level
+map.setView([51.505, -0.09], 13); // Example coordinates (London)
 
+// Add OpenStreetMap tiles
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; OpenStreetMap contributors'
+}).addTo(map);
+
+// Enable two-finger zoom on touch devices
+map.on('touchstart', function(e) {
+    if (e.touches.length === 2) {
+        map.touchZoom.enable();
+    } else {
+        map.touchZoom.disable();
+    }
+});
+document.getElementById('event-form').addEventListener('submit', function(event) {
+    event.preventDefault();
+    
+    var location = document.getElementById('event-location').value;
+    // Send location data to your backend via API or add it directly to your map
+    addPinToMap(location);
+});
+function addPinToMap(location) {
+    // Use a geocoding API to get latitude and longitude (example using OpenCage API)
+    var apiKey = 'YOUR-API-KEY-HERE';
+    fetch(`https://api.opencagedata.com/geocode/v1/json?q=${location}&key=${apiKey}`)
+        .then(response => response.json())
+        .then(data => {
+            var lat = data.results[0].geometry.lat;
+            var lng = data.results[0].geometry.lng;
+            // Add a marker to the map
+            L.marker([lat, lng]).addTo(map).bindPopup(location);
+        })
+        .catch(error => console.error('Error:', error));
