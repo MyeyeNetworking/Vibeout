@@ -278,3 +278,39 @@ function initSlider(slider) {
 document.querySelectorAll('.slider').forEach(slider => {
     initSlider(slider);
 });
+
+
+
+
+
+
+
+
+// Initialize the map
+let map = L.map('map').setView([0, 0], 2); // Default view with a zoom level
+
+// Add OpenStreetMap tiles (free)
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 18,
+    gestureHandling: true, // Allows two-finger scroll and zoom
+}).addTo(map);
+
+// Function to add markers
+function addMarker(lat, lng, description) {
+    L.marker([lat, lng]).addTo(map)
+        .bindPopup(description)
+        .openPopup();
+}
+
+// Example: Add marker when event is submitted
+document.getElementById("event-form").addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    // Get location (assume lat/lng is available)
+    const eventLocation = document.getElementById("event-location").value;
+
+    // For simplicity, assuming lat/lng values (you may use a geocoder)
+    const [lat, lng] = eventLocation.split(","); // Assume input is "latitude,longitude"
+    
+    addMarker(parseFloat(lat), parseFloat(lng), "Event Location");
+});
