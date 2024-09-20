@@ -310,3 +310,14 @@ map.on('touchstart', function(e) {
 });
 
 
+
+
+
+document.getElementById('event-form').addEventListener('submit', function(event) {
+    event.preventDefault();
+    
+    var location = document.getElementById('event-location').value;
+    // Send location data to your backend via API or add it directly to your map
+    addPinToMap(location);
+});
+
