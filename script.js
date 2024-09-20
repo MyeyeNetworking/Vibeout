@@ -7,7 +7,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const navMenu = document.querySelector('.nav-menu');
     let currentIndex = 0;
 
-    
     function updateSlideshow() {
         const offset = -currentIndex * 100;
         slideshowContainer.style.transform = `translateX(${offset}%)`;
@@ -283,37 +282,23 @@ document.querySelectorAll('.slider').forEach(slider => {
 
 
 
-// Initialize the map
-let map = L.map('map').setView([0, 0], 2); // Default view with a zoom level
 
-// Add OpenStreetMap tiles (free)
+
+
+
+var map = L.map('map').setView([40.7128, -74.0060], 13); // Default center (New York City)
+
+// Load map tiles from OpenStreetMap
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: 18,
-    gestureHandling: true, // Allows two-finger scroll and zoom
+    attribution: '© OpenStreetMap contributors'
 }).addTo(map);
 
-// Function to add markers
-function addMarker(lat, lng, description) {
-    L.marker([lat, lng]).addTo(map)
-        .bindPopup(description)
-        .openPopup();
-}
+// Add pins for locations
+var locations = [
+    [40.7128, -74.0060], // Example Location 1
+    [34.0522, -118.2437] // Example Location 2
+];
 
-// Example: Add marker when event is submitted
-document.getElementById("event-form").addEventListener("submit", function(event) {
-    event.preventDefault();
-
-    // Get location (assume lat/lng is available)
-    const eventLocation = document.getElementById("event-location").value;
-
-    // For simplicity, assuming lat/lng values (you may use a geocoder)
-    const [lat, lng] = eventLocation.split(","); // Assume input is "latitude,longitude"
-    
-    addMarker(parseFloat(lat), parseFloat(lng), "Event Location");
+locations.forEach(function(location) {
+    L.marker(location).addTo(map);
 });
-});
-
-
-
-
-
