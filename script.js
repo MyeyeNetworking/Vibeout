@@ -286,45 +286,22 @@ document.querySelectorAll('.slider').forEach(slider => {
 
 
 
-// Initialize the map
-var map = L.map('map', {
-    touchZoom: false,    // Disable touch zoom by default
-    scrollWheelZoom: false, // Disable scroll zoom
-    doubleClickZoom: false, // Disable double-click zoom
-});
+function initMap() {
+    var map = new google.maps.Map(document.getElementById('map'), {
+        center: {lat: 40.7128, lng: -74.0060}, // Default center (New York City)
+        zoom: 8
+    });
 
-// Set the map center and zoom level
-map.setView([51.505, -0.09], 13); // Example coordinates (London)
+    // Add a pin for each event location
+    var locations = [
+        {lat: 40.7128, lng: -74.0060}, // Example Location 1
+        {lat: 34.0522, lng: -118.2437}  // Example Location 2
+    ];
 
-// Add OpenStreetMap tiles
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; OpenStreetMap contributors'
-}).addTo(map);
-
-// Enable two-finger zoom on touch devices
-map.on('touchstart', function(e) {
-    if (e.touches.length === 2) {
-        map.touchZoom.enable();
-    } else {
-        map.touchZoom.disable();
-    }
-});
-document.getElementById('event-form').addEventListener('submit', function(event) {
-    event.preventDefault();
-    
-    var location = document.getElementById('event-location').value;
-    // Send location data to your backend via API or add it directly to your map
-    addPinToMap(location);
-});
-function addPinToMap(location) {
-    // Use a geocoding API to get latitude and longitude (example using OpenCage API)
-    var apiKey = 'YOUR-API-KEY-HERE';
-    fetch(`https://api.opencagedata.com/geocode/v1/json?q=${location}&key=${apiKey}`)
-        .then(response => response.json())
-        .then(data => {
-            var lat = data.results[0].geometry.lat;
-            var lng = data.results[0].geometry.lng;
-            // Add a marker to the map
-            L.marker([lat, lng]).addTo(map).bindPopup(location);
-        })
-        .catch(error => console.error('Error:', error));
+    locations.forEach(function(location) {
+        new google.maps.Marker({
+            position: location,
+            map: map
+        });
+    });
+}
