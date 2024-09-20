@@ -2,17 +2,16 @@
 <html lang="en" >
 <head>
   <meta charset="UTF-8">
-  <title>VIBEOUT</title>
+  <title>CodePen - Untitled</title>
   <link rel="stylesheet" href="./style.css">
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
-<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
-  
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet-gesture-handling/dist/leaflet-gesture-handling.min.css" />
+<script src="https://unpkg.com/leaflet-gesture-handling"></script>
+
 
 
 </head>
 <body>
-
-  
 <!-- partial:index.partial.html -->
 <!DOCTYPE html>
 <html lang="en">
@@ -24,10 +23,6 @@
 </head>
 <body>
 
-
- <script async defer src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap"></script>
-
-
 <header>
     <div class="logo">VIBEOUT</div>
     <button class="menu-toggle">☰</button> <!-- Mobile menu toggle button -->
@@ -35,7 +30,7 @@
         <ul class="nav-menu">
             <li><a href="#" data-page="home">Home</a></li>
             <li><a href="#" data-page="genra">Genra</a></li>
-            <li><a href="#" data-page="promote">Promote</a></li>
+            <li><a href="#" data-page="promote">Promote Event</a></li>
         </ul>
     </nav>
 </header>
@@ -46,7 +41,7 @@
         <section class="slideshow-section">
             <div class="slideshow">
                 <div class="slideshow-title-bar">
-                    <h2>Featured Event</h2>
+                    <h2>Slideshow Title</h2>
                 </div>
                 <div class="slideshow-container">
                     <div class="slideshow-slide">
@@ -85,12 +80,11 @@
             </div>
         </section>
 
-   <section id="map-section">
-    <h2>Event Locations</h2>
-    <div id="map" style="height: 500px; width: 100%;"></div>
-</section>
+      <div id="map" style="height: 500px; width: 100%;"></div>
 
-
+      <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap">
+</script>
 
 
 
@@ -239,9 +233,6 @@
 
             <label for="event-location">Event Location:</label>
             <input type="text" id="event-location" name="event-location" required>
-          <label for="event-location">Event Location:</label>
-<input type="text" id="event-location" name="event-location" placeholder="Enter event address" required>
-
           
           <label for="event-category">Event Category:</label>
         <select id="event-category" name="event-category" required>
@@ -278,8 +269,6 @@
 </html>
 <!-- partial -->
   <script  src="./script.js"></script>
-
-   
 
 </body>
 </html>
