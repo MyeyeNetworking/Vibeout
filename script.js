@@ -308,11 +308,6 @@ map.on('touchstart', function(e) {
         map.touchZoom.disable();
     }
 });
-
-
-
-
-
 document.getElementById('event-form').addEventListener('submit', function(event) {
     event.preventDefault();
     
@@ -320,4 +315,17 @@ document.getElementById('event-form').addEventListener('submit', function(event)
     // Send location data to your backend via API or add it directly to your map
     addPinToMap(location);
 });
+function addPinToMap(location) {
+    // Use a geocoding API to get latitude and longitude (example using OpenCage API)
+    var apiKey = 'YOUR-API-KEY-HERE';
+    fetch(`https://api.opencagedata.com/geocode/v1/json?q=${location}&key=${apiKey}`)
+        .then(response => response.json())
+        .then(data => {
+            var lat = data.results[0].geometry.lat;
+            var lng = data.results[0].geometry.lng;
+            // Add a marker to the map
+            L.marker([lat, lng]).addTo(map).bindPopup(location);
+        })
+        .catch(error => console.error('Error:', error));
+}
 
