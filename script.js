@@ -285,24 +285,28 @@ document.querySelectorAll('.slider').forEach(slider => {
 
 
 
-function initMap() {
-    var map = new google.maps.Map(document.getElementById('map'), {
-        center: {lat: 40.7128, lng: -74.0060}, // Default center (New York City)
-        zoom: 8
-    });
+// Initialize the map
+var map = L.map('map', {
+    touchZoom: false,    // Disable touch zoom by default
+    scrollWheelZoom: false, // Disable scroll zoom
+    doubleClickZoom: false, // Disable double-click zoom
+});
 
-    // Add a pin for each event location
-    var locations = [
-        {lat: 40.7128, lng: -74.0060}, // Example Location 1
-        {lat: 34.0522, lng: -118.2437}  // Example Location 2
-    ];
+// Set the map center and zoom level
+map.setView([51.505, -0.09], 13); // Example coordinates (London)
 
-    locations.forEach(function(location) {
-        new google.maps.Marker({
-            position: location,
-            map: map
-        });
-    });
-}
+// Add OpenStreetMap tiles
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; OpenStreetMap contributors'
+}).addTo(map);
+
+// Enable two-finger zoom on touch devices
+map.on('touchstart', function(e) {
+    if (e.touches.length === 2) {
+        map.touchZoom.enable();
+    } else {
+        map.touchZoom.disable();
+    }
+});
 
 
