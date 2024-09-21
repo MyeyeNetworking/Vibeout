@@ -1,31 +1,20 @@
 <!DOCTYPE html>
-<html lang="en" >
-<head>
-  <meta charset="UTF-8">
-  <title>VIBEOUT</title>
-  <link rel="stylesheet" href="./style.css">
-
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
-<script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
-
-
-
-</head>
-<body>
-<!-- partial:index.partial.html -->
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VibeOut</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>VIBEOUT</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
 </head>
 <body>
 
+<audio id="background-audio" src="image/BG.music.mp3" autoplay loop></audio>
+
 <header>
     <div class="logo">VIBEOUT</div>
-    <button class="menu-toggle">☰</button> <!-- Mobile menu toggle button -->
+    <button class="menu-toggle">☰</button>
     <nav>
         <ul class="nav-menu">
             <li><a href="#" data-page="home">Home</a></li>
@@ -80,154 +69,138 @@
             </div>
         </section>
 
-      <section id="event-map">
-    <h2>Event Locations</h2>
-    <div id="map" style="height: 200px;"></div>
-</section>
+        <section id="event-map">
+            <h2>Event Locations</h2>
+            <div id="map" style="height: 200px;"></div>
+        </section>
 
-
-      <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap">
-</script>
-
-      <!-- Background Audio -->
-<audio id="background-audio" autoplay loop>
-    <source src="image/BG.musuc.mp3" type="audio/mpeg">
-    Your browser does not support the audio element.
-</audio>
-
-
+        <script async defer src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap"></script>
 
         <section class="video-section">
             <div class="video-container">
-                <video src="image/video1.mp4" autoplay muted controls></video>
+                <video src="image/video1.mp4" autoplay muted controls onplay="pauseBackgroundAudio()"></video>
                 <div class="video-title">You missed this</div>
             </div>
         </section>
     </section>
-  
 
     <!-- Genra Section -->
     <section id="genra" class="page-section">
-         </div>
-    <div class="genra-row">
-        <div class="genra-image-container">
-          <a href="#soca">
-            <img src="image/soca.jpg" alt="SOCA">
-          </a>
-            <div class="genra-title">SOCA</div>
+        <div class="genra-row">
+            <div class="genra-image-container">
+                <a href="#soca">
+                    <img src="image/soca.jpg" alt="SOCA">
+                </a>
+                <div class="genra-title">SOCA</div>
+            </div>
+            <div class="genra-image-container">
+                <a href="#dancehall">
+                    <img src="image/dancehall.jpg" alt="DANCEHALL">
+                </a>
+                <div class="genra-title">DANCEHALL</div>
+            </div>
         </div>
-        <div class="genra-image-container">
-          <a href="#soca">
-            <img src="image/dancehall.jpg" alt="DANCEHALL">
-          </a>
-            <div class="genra-title">DANCEHALL</div>
+        <div class="genra-row">
+            <div class="genra-image-container">
+                <a href="#reggae">
+                    <img src="image/reggae (1).jpg" alt="REGGAE">
+                </a>
+                <div class="genra-title">REGGAE</div>
+            </div>
+            <div class="genra-image-container">
+                <a href="#retro">
+                    <img src="image/retro.jpg" alt="RETRO">
+                </a>
+                <div class="genra-title">RETRO</div>
+            </div>
         </div>
-    </div>
-    <div class="genra-row">
-        <div class="genra-image-container">
-          <a href="#reggae">
-            <img src="image/reggae (1).jpg" alt="REGGAE">
-          </a>
-            <div class="genra-title">REGGAE</div>
-        </div>
-        <div class="genra-image-container">
-          <a href="#retro">
-            <img src="image/retro.jpg" alt="RETRO">
-          </a>
-            <div class="genra-title">RETRO</div>
-        </div>
-    </div>
-</section>
+    </section>
 
     <!-- Dancehall Section -->
     <section id="dancehall" class="page-section">
         <h2>Dancehall</h2>
-      <div class="slider">
-    <div class="slider-item active">
-        <h2>Content 1</h2>
-        <p>This is the first content.</p>
-    </div>
-    <div class="slider-item">
-        <h2>Content 2</h2>
-        <p>This is the second content.</p>
-    </div>
-    <div class="slider-item">
-        <h2>Content 3</h2>
-        <p>This is the third content.</p>
-    </div>
-    <button class="prev-btn">Previous</button>
-    <button class="next-btn">Next</button>
-</div>
-
+        <div class="slider">
+            <div class="slider-item active">
+                <h2>Content 1</h2>
+                <p>This is the first content.</p>
+            </div>
+            <div class="slider-item">
+                <h2>Content 2</h2>
+                <p>This is the second content.</p>
+            </div>
+            <div class="slider-item">
+                <h2>Content 3</h2>
+                <p>This is the third content.</p>
+            </div>
+            <button class="prev-btn">Previous</button>
+            <button class="next-btn">Next</button>
+        </div>
         <p>Content for Dancehall section.</p>
     </section>
 
     <!-- Reggae Section -->
     <section id="reggae" class="page-section">
         <h2>Reggae</h2>
-      <div class="slider">
-    <div class="slider-item active">
-        <h2>Content 1</h2>
-        <p>This is the first content.</p>
-    </div>
-    <div class="slider-item">
-        <h2>Content 2</h2>
-        <p>This is the second content.</p>
-    </div>
-    <div class="slider-item">
-        <h2>Content 3</h2>
-        <p>This is the third content.</p>
-    </div>
-    <button class="prev-btn">Previous</button>
-    <button class="next-btn">Next</button>
-</div>
-
+        <div class="slider">
+            <div class="slider-item active">
+                <h2>Content 1</h2>
+                <p>This is the first content.</p>
+            </div>
+            <div class="slider-item">
+                <h2>Content 2</h2>
+                <p>This is the second content.</p>
+            </div>
+            <div class="slider-item">
+                <h2>Content 3</h2>
+                <p>This is the third content.</p>
+            </div>
+            <button class="prev-btn">Previous</button>
+            <button class="next-btn">Next</button>
+        </div>
         <p>Content for Reggae section.</p>
     </section>
 
     <!-- Soca Section -->
     <section id="soca" class="page-section">
         <h2>Soca</h2>
-      <div class="slider">
-    <div class="slider-item active">
-        <h2>Content 1</h2>
-        <p>This is the first content.</p>
-    </div>
-    <div class="slider-item">
-        <h2>Content 2</h2>
-        <p>This is the second content.</p>
-    </div>
-    <div class="slider-item">
-        <h2>Content 3</h2>
-        <p>This is the third content.</p>
-    </div>
-    <button class="prev-btn">Previous</button>
-    <button class="next-btn">Next</button>
-</div>
-
+        <div class="slider">
+            <div class="slider-item active">
+                <h2>Content 1</h2>
+                <p>This is the first content.</p>
+            </div>
+            <div class="slider-item">
+                <h2>Content 2</h2>
+                <p>This is the second content.</p>
+            </div>
+            <div class="slider-item">
+                <h2>Content 3</h2>
+                <p>This is the third content.</p>
+            </div>
+            <button class="prev-btn">Previous</button>
+            <button class="next-btn">Next</button>
+        </div>
         <p>Content for Soca section.</p>
     </section>
 
     <!-- Retro Section -->
     <section id="retro" class="page-section">
-        <h2>Retro</h2><div class="slider">
-    <div class="slider-item active">
-        <h2>Content 1</h2>
-        <p>This is the first content.</p>
-    </div>
-    <div class="slider-item">
-        <h2>Content 2</h2>
-        <p>This is the second content.</p>
-    </div>
-    <div class="slider-item">
-        <h2>Content 3</h2>
-        <p>This is the third content.</p>
-    </div>
-    <button class="prev-btn">Previous</button>
-    <button class="next-btn">Next</button>
-</div>
-
+        <h2>Retro</h2>
+        <div class="slider">
+            <div class="slider-item active">
+                <h2>Content 1</h2>
+                <p>This is the first content.</p>
+            </div>
+            <div class="slider-item">
+                <h2>Content 2</h2>
+                <p>This is the second content.</p>
+            </div>
+            <div class="slider-item">
+                <h2>Content 3</h2>
+                <p>This is the third content.</p>
+            </div>
+            <button class="prev-btn">Previous</button>
+            <button class="next-btn">Next</button>
+        </div>
         <p>Content for Retro section.</p>
     </section>
 
@@ -242,16 +215,15 @@
             <input type="date" id="event-date" name="event-date" required>
 
             <label for="event-location">Event Location:</label>
-<input type="text" id="event-location" name="event-location" placeholder="Enter event address" required>
+            <input type="text" id="event-location" name="event-location" placeholder="Enter event address" required>
 
-          
-          <label for="event-category">Event Category:</label>
-        <select id="event-category" name="event-category" required>
-            <option value="reggae">Reggae</option>
-            <option value="dancehall">Dancehall</option>
-            <option value="soca">Soca</option>
-            <option value="retro">Retro</option>
-        </select>
+            <label for="event-category">Event Category:</label>
+            <select id="event-category" name="event-category" required>
+                <option value="reggae">Reggae</option>
+                <option value="dancehall">Dancehall</option>
+                <option value="soca">Soca</option>
+                <option value="retro">Retro</option>
+            </select>
 
             <label for="event-flyer">Upload Event Flyer (Max 2):</label>
             <input type="file" id="event-flyer" name="event-flyer" accept="image/*" multiple required>
@@ -276,10 +248,10 @@
 </footer>
 
 <script src="scripts.js"></script>
-</body>
-</html>
-<!-- partial -->
-  <script  src="./script.js"></script>
-
+<script>
+function pauseBackgroundAudio() {
+    document.getElementById('background-audio').pause();
+}
+</script>
 </body>
 </html>
