@@ -296,3 +296,71 @@ function initSlider(slider) {
 document.querySelectorAll('.slider').forEach(slider => {
     initSlider(slider);
 });
+
+
+
+
+
+
+
+
+
+
+// Event form submission and storage in localStorage
+document.getElementById('event-form').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const eventName = document.getElementById('event-name').value;
+    const eventDate = new Date(document.getElementById('event-date').value);
+    const eventLocation = document.getElementById('event-location').value;
+    const eventDescription = document.getElementById('event-description').value;
+    const eventGenre = document.getElementById('event-genre').value; // Get the selected genre
+
+    const currentDate = new Date();
+    const sevenDaysLater = new Date();
+    sevenDaysLater.setDate(currentDate.getDate() + 7);
+
+    const eventData = {
+        name: eventName,
+        date: eventDate,
+        location: eventLocation,
+        description: eventDescription,
+        genre: eventGenre // Include genre in the event data
+    };
+
+    let events = JSON.parse(localStorage.getItem('events')) || { featured: [], upcoming: [] };
+
+    if (eventDate <= sevenDaysLater) {
+        events.featured.push(eventData);
+    } else {
+        events.upcoming.push(eventData);
+    }
+
+    localStorage.setItem('events', JSON.stringify(events));
+
+    // Populate the carousel for the corresponding genre
+    populateCarousel(eventData);
+
+    alert('Event submitted successfully!');
+    // Optionally, you can clear the form fields here
+});
+
+// Function to populate the carousel on the corresponding genre page
+function populateCarousel(eventData) {
+    const genreCarousel = document.querySelector(`.carousel[data-genre="${eventData.genre}"]`);
+    if (genreCarousel) {
+        const carouselItem = document.createElement('div');
+        carouselItem.className = 'carousel-item';
+        carouselItem.innerHTML = `
+            <h3>${eventData.name}</h3>
+            <p>Date: ${new Date(eventData.date).toDateString()}</p>
+            <p>Location: ${eventData.location}</p>
+            <p>${eventData.description}</p>
+        `;
+        genreCarousel.appendChild(carouselItem);
+    }
+}
+
+// Call this function when the page loads
+document.addEventListener('DOMContentLoaded', displayFeaturedEvents);
+
