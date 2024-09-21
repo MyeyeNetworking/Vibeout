@@ -7,6 +7,25 @@ document.addEventListener('DOMContentLoaded', () => {
     const navMenu = document.querySelector('.nav-menu');
     let currentIndex = 0;
 
+    // Background audio setup
+    const backgroundAudio = new Audio('path/to/your/audio/file.mp3'); // Replace with your audio file path
+    backgroundAudio.loop = true;
+    backgroundAudio.volume = 0.5; // Adjust volume as needed
+    backgroundAudio.play();
+
+    // Pause audio when video is playing
+    document.querySelectorAll('video').forEach(video => {
+        video.addEventListener('play', () => {
+            backgroundAudio.pause();
+        });
+        video.addEventListener('pause', () => {
+            backgroundAudio.play();
+        });
+        video.addEventListener('ended', () => {
+            backgroundAudio.play();
+        });
+    });
+
     function updateSlideshow() {
         const offset = -currentIndex * 100;
         slideshowContainer.style.transform = `translateX(${offset}%)`;
