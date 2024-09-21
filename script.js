@@ -110,7 +110,7 @@ function displayFeaturedEvents() {
     // Filter out events that are happening today or in the past
     events.featured = events.featured.filter(event => {
         const eventDate = new Date(event.date);
-        return eventDate.toDateString() !== currentDate.toDateString(); // Exclude today's events
+        return eventDate > currentDate; // Only keep upcoming events
     });
 
     // Update localStorage after filtering
