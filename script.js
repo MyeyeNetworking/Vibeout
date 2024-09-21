@@ -314,7 +314,7 @@ document.getElementById('event-form').addEventListener('submit', function(event)
     const eventDate = new Date(document.getElementById('event-date').value);
     const eventLocation = document.getElementById('event-location').value;
     const eventDescription = document.getElementById('event-description').value;
-    const eventGenre = document.getElementById('event-genre').value; // Get the selected genre
+    const eventCategory = document.getElementById('event-category').value; // Get selected category
 
     const currentDate = new Date();
     const sevenDaysLater = new Date();
@@ -325,68 +325,70 @@ document.getElementById('event-form').addEventListener('submit', function(event)
         date: eventDate,
         location: eventLocation,
         description: eventDescription,
-        genre: eventGenre // Include genre in the event data
+        category: eventCategory // Store category with event data
     };
 
-    let events = JSON.parse(localStorage.getItem('events')) || { featured: [], upcoming: [] };
+    let events = JSON.parse(localStorage.getItem('events')) || { featured: [], upcoming: {} };
 
+    // Populate based on event date
     if (eventDate <= sevenDaysLater) {
-        events.featured.push(eventData);
+        if (!events.featured[eventCategory]) {
+            events.featured[eventCategory] = [];
+        }
+        events.featured[eventCategory].push(eventData);
     } else {
-        events.upcoming.push(eventData);
+        if (!events.upcoming[eventCategory]) {
+            events.upcoming[eventCategory] = [];
+        }
+        events.upcoming[eventCategory].push(eventData);
     }
 
     localStorage.setItem('events', JSON.stringify(events));
 
-    // Populate the carousel for the corresponding genre
-    populateCarousel(eventData);
-
     alert('Event submitted successfully!');
     // Optionally, you can clear the form fields here
+    displayGenreEvents(eventCategory); // Display the events in the corresponding genre
 });
 
-// Function to populate the carousel on the corresponding genre page
-function populateCarousel(eventData) {
-    const genreCarousel = document.querySelector(`.carousel[data-genre="${eventData.genre}"]`);
-    if (genreCarousel) {
-        const carouselItem = document.createElement('div');
-        carouselItem.className = 'carousel-item';
-        carouselItem.innerHTML = `
-            <h3>${eventData.name}</h3>
-            <p>Date: ${new Date(eventData.date).toDateString()}</p>
-            <p>Location: ${eventData.location}</p>
-            <p>${eventData.description}</p>
+// Function to display events in the corresponding genre
+function displayGenreEvents(category) {
+    const events = JSON.parse(localStorage.getItem('events')) || { featured: {} };
+    const genreContainer = document.querySelector(`.${category}-events .product-grid`); // Select appropriate genre container
+    genreContainer.innerHTML = ''; // Clear existing content
+
+    // Filter and display featured events for the selected category
+    const categoryEvents = events.featured[category] || [];
+    const currentDate = new Date(); // Get today's date
+
+    categoryEvents.forEach(event => {
+        const eventCard = document.createElement('div');
+        eventCard.className = 'product-card';
+        eventCard.innerHTML = `
+            <h3>${event.name}</h3>
+            <p>Date: ${new Date(event.date).toDateString()}</p>
+            <p>Location: ${event.location}</p>
+            <p>${event.description}</p>
         `;
-        genreCarousel.appendChild(carouselItem);
-    }
+        genreContainer.appendChild(eventCard);
+    });
 }
 
-// Call this function when the page loads
-document.addEventListener('DOMContentLoaded', displayFeaturedEvents);
-
-
-
-
-
-
-
-
-
-
-
-document.getElementById('event-form').addEventListener('submit', function(event) {
-    event.preventDefault(); // Prevent the default form submission
-
-    // Gather form data (you can customize this according to your needs)
-    const eventName = document.getElementById('event-name').value;
-    const eventDate = document.getElementById('event-date').value;
-    const eventLocation = document.getElementById('event-location').value;
-    const eventCategory = document.getElementById('event-category').value;
-    const eventDescription = document.getElementById('event-description').value;
-
-    // Process the data (e.g., save it or populate the carousel here)
-
-    // Navigate to the Genra page after submission
-    window.location.hash = 'genra'; // This changes the URL to the Genra section
+// Call this function when the page loads for each genre
+document.addEventListener('DOMContentLoaded', () => {
+    displayGenreEvents('Soca'); // Adjust as needed for each genre page
+    displayGenreEvents('Dancehall'); // Adjust as needed for each genre page
+    // Repeat for other genres...
 });
+
+
+
+
+
+
+
+
+
+
+
+
 
