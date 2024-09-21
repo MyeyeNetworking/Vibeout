@@ -273,3 +273,24 @@ if (document.getElementById('map')) {
         .bindPopup('Event Location')
         .openPopup();
 }
+
+
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    const backgroundAudio = document.getElementById('background-audio');
+    const videoPlayer = document.getElementById('video-player');
+
+    function checkVideoPlayback() {
+        if (!videoPlayer.muted && !videoPlayer.paused) {
+            backgroundAudio.pause(); // Pause background music when video is playing with sound
+        } else {
+            backgroundAudio.play();  // Resume background music if video is paused or muted
+        }
+    }
+
+    // Check for play, pause, and mute/unmute events
+    videoPlayer.addEventListener('play', checkVideoPlayback);
+    videoPlayer.addEventListener('pause', checkVideoPlayback);
+    videoPlayer.addEventListener('volumechange', checkVideoPlayback);
+});
