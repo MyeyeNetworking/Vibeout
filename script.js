@@ -7,25 +7,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const navMenu = document.querySelector('.nav-menu');
     let currentIndex = 0;
 
-    // Background audio setup
-    const backgroundAudio = new Audio('path/to/your/audio/file.mp3'); // Replace with your audio file path
-    backgroundAudio.loop = true;
-    backgroundAudio.volume = 0.5; // Adjust volume as needed
-    backgroundAudio.play();
-
-    // Pause audio when video is playing
-    document.querySelectorAll('video').forEach(video => {
-        video.addEventListener('play', () => {
-            backgroundAudio.pause();
-        });
-        video.addEventListener('pause', () => {
-            backgroundAudio.play();
-        });
-        video.addEventListener('ended', () => {
-            backgroundAudio.play();
-        });
-    });
-
     function updateSlideshow() {
         const offset = -currentIndex * 100;
         slideshowContainer.style.transform = `translateX(${offset}%)`;
@@ -121,21 +102,10 @@ document.getElementById('event-form').addEventListener('submit', function(event)
 
 function displayFeaturedEvents() {
     const events = JSON.parse(localStorage.getItem('events')) || { featured: [] };
+
     const featuredContainer = document.querySelector('.events .product-grid');
     featuredContainer.innerHTML = ''; // Clear existing content
 
-    const currentDate = new Date(); // Get today's date
-
-    // Filter out events that are happening today or in the past
-    events.featured = events.featured.filter(event => {
-        const eventDate = new Date(event.date);
-        return eventDate > currentDate; // Only keep upcoming events
-    });
-
-    // Update localStorage after filtering
-    localStorage.setItem('events', JSON.stringify(events));
-
-    // Display the remaining featured events
     events.featured.forEach(event => {
         const eventCard = document.createElement('div');
         eventCard.className = 'product-card';
