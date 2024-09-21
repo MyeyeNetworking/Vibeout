@@ -102,10 +102,21 @@ document.getElementById('event-form').addEventListener('submit', function(event)
 
 function displayFeaturedEvents() {
     const events = JSON.parse(localStorage.getItem('events')) || { featured: [] };
-
     const featuredContainer = document.querySelector('.events .product-grid');
     featuredContainer.innerHTML = ''; // Clear existing content
 
+    const currentDate = new Date(); // Get today's date
+
+    // Filter out events that are happening today or in the past
+    events.featured = events.featured.filter(event => {
+        const eventDate = new Date(event.date);
+        return eventDate > currentDate; // Only keep upcoming events
+    });
+
+    // Update localStorage after filtering
+    localStorage.setItem('events', JSON.stringify(events));
+
+    // Display the remaining featured events
     events.featured.forEach(event => {
         const eventCard = document.createElement('div');
         eventCard.className = 'product-card';
