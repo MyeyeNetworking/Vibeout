@@ -7,13 +7,38 @@ document.addEventListener('DOMContentLoaded', () => {
     const navMenu = document.querySelector('.nav-menu');
     let currentIndex = 0;
 
-    // Background audio
+    // Background audio setup
     const backgroundAudio = new Audio('image/BG.music.mp3');
-    backgroundAudio.loop = true;
+    backgroundAudio.loop = true; // Loop the background audio
+    backgroundAudio.play(); // Play automatically
 
-    // Try to play the audio on page load
-    backgroundAudio.play().catch(error => {
-        console.log('Audio playback was prevented. User interaction is needed.');
+    // Video elements
+    const videos = document.querySelectorAll('video');
+
+    videos.forEach(video => {
+        video.addEventListener('play', () => {
+            if (!video.muted) {
+                backgroundAudio.pause(); // Pause background audio when video plays unmuted
+            }
+        });
+
+        video.addEventListener('pause', () => {
+            if (video.muted) {
+                backgroundAudio.play(); // Resume background audio if video is muted
+            }
+        });
+
+        video.addEventListener('ended', () => {
+            backgroundAudio.play(); // Resume background audio when video ends
+        });
+
+        video.addEventListener('volumechange', () => {
+            if (video.volume === 0) {
+                backgroundAudio.play(); // Resume background audio when video is muted
+            } else if (!video.muted && !video.paused) {
+                backgroundAudio.pause(); // Pause background audio when video is playing unmuted
+            }
+        });
     });
 
     function updateSlideshow() {
@@ -267,8 +292,7 @@ function initSlider(slider) {
     }
 }
 
-// Initialize the sliders
-const sliders = document.querySelectorAll('.slider');
-sliders.forEach(slider => {
+// Apply the function to all sliders on the page
+document.querySelectorAll('.slider').forEach(slider => {
     initSlider(slider);
 });
