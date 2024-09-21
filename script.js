@@ -259,21 +259,4 @@ document.querySelectorAll('.slider').forEach(slider => {
 
 
 
-if (document.getElementById('map')) {
-    const map = L.map('map', {
-        scrollWheelZoom: false, // Disable scroll wheel zoom
-        touchZoom: false        // Disable touch zoom (two-finger zooming)
-    }).setView([51.505, -0.09], 13); // Example coordinates
-
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-    }).addTo(map);
-
-    L.marker([51.505, -0.09]).addTo(map)
-        .bindPopup('Event Location')
-        .openPopup();
-}
-
-
-
 
