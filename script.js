@@ -102,10 +102,21 @@ document.getElementById('event-form').addEventListener('submit', function(event)
 
 function displayFeaturedEvents() {
     const events = JSON.parse(localStorage.getItem('events')) || { featured: [] };
-
     const featuredContainer = document.querySelector('.events .product-grid');
     featuredContainer.innerHTML = ''; // Clear existing content
 
+    const currentDate = new Date(); // Get today's date
+
+    // Filter out events that are happening today or in the past
+    events.featured = events.featured.filter(event => {
+        const eventDate = new Date(event.date);
+        return eventDate.toDateString() !== currentDate.toDateString(); // Exclude today's events
+    });
+
+    // Update localStorage after filtering
+    localStorage.setItem('events', JSON.stringify(events));
+
+    // Display the remaining featured events
     events.featured.forEach(event => {
         const eventCard = document.createElement('div');
         eventCard.className = 'product-card';
@@ -250,46 +261,4 @@ function initSlider(slider) {
 // Apply the function to all sliders on the page
 document.querySelectorAll('.slider').forEach(slider => {
     initSlider(slider);
-});
-
-
-
-
-
-
-
-document.addEventListener('DOMContentLoaded', function () {
-    const backgroundAudio = document.getElementById('background-audio');
-    const videos = document.querySelectorAll('video'); // In case you have multiple videos
-
-    // Ensure the background audio starts automatically (some browsers block autoplay with sound)
-    backgroundAudio.muted = true; // Initially muted to avoid autoplay restrictions
-    backgroundAudio.play();
-
-    // Wait for the user to interact with the page, then unmute the background audio
-    function unmuteAudioOnInteraction() {
-        backgroundAudio.muted = false;
-        document.removeEventListener('click', unmuteAudioOnInteraction); // Remove listener after first interaction
-    }
-
-    document.addEventListener('click', unmuteAudioOnInteraction);
-
-    // Function to check if a video is unmuted and playing
-    function handleVideoPlay(video) {
-        if (!video.muted && !video.paused) {
-            backgroundAudio.pause();
-        } else {
-            backgroundAudio.play();
-        }
-    }
-
-    // Add event listeners for each video
-    videos.forEach(video => {
-        // Pause background audio when the video starts playing and is unmuted
-        video.addEventListener('play', () => handleVideoPlay(video));
-        
-        // Resume background audio when the video is paused or muted
-        video.addEventListener('pause', () => handleVideoPlay(video));
-        video.addEventListener('volumechange', () => handleVideoPlay(video));
-    });
 });
