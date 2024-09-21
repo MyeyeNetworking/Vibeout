@@ -364,3 +364,29 @@ function populateCarousel(eventData) {
 // Call this function when the page loads
 document.addEventListener('DOMContentLoaded', displayFeaturedEvents);
 
+
+
+
+
+
+
+
+
+
+
+document.getElementById('event-form').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent the default form submission
+
+    // Gather form data (you can customize this according to your needs)
+    const eventName = document.getElementById('event-name').value;
+    const eventDate = document.getElementById('event-date').value;
+    const eventLocation = document.getElementById('event-location').value;
+    const eventCategory = document.getElementById('event-category').value;
+    const eventDescription = document.getElementById('event-description').value;
+
+    // Process the data (e.g., save it or populate the carousel here)
+
+    // Navigate to the Genra page after submission
+    window.location.hash = 'genra'; // This changes the URL to the Genra section
+});
+
