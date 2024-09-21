@@ -262,3 +262,24 @@ function initSlider(slider) {
 document.querySelectorAll('.slider').forEach(slider => {
     initSlider(slider);
 });
+
+
+
+
+
+
+
+
+const audio = document.getElementById('background-audio');
+const audioToggle = document.getElementById('audio-toggle');
+
+audioToggle.addEventListener('click', () => {
+    if (audio.paused) {
+        audio.play();
+        audioToggle.textContent = 'Pause';
+    } else {
+        audio.pause();
+        audioToggle.textContent = 'Play';
+    }
+});
+
