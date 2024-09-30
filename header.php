@@ -14,7 +14,7 @@
         Your browser does not support the audio element.
     </audio>
 <header>
-    <div class="logo">VIBEO</div>
+    <div class="logo">VIBEOUT</div>
     <button class="menu-toggle">☰</button> <!-- Mobile menu toggle button -->
     <nav>
         <ul class="nav-menu">
