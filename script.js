@@ -425,3 +425,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
+
+
+// Simulate test
+document.addEventListener('DOMContentLoaded', () => {
+    localStorage.removeItem('isLoggedIn'); // Ensure user is logged out
+    const promoteLink = document.querySelector('a[data-page="promote"]');
+    promoteLink.click(); // Simulate clicking 'Promote Event'
+
+    // Assert the user is redirected to login
+    setTimeout(() => {
+        console.assert(window.location.hash === '#login', 'User should be redirected to login page if not logged in');
+        console.log('Test passed: user is redirected to login.');
+    }, 100);
+});
+
