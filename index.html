@@ -284,21 +284,69 @@
         <p>Content for Retro section.</p>
     </section>
 
-  <!-- login section -->
-    <section id="login page" class="page-section">
-        <h2>login</h2><div class="slider">
-   <form method="POST" action="login.php">
-    <label for="email">Email:</label>
-    <input type="email" id="email" name="email" required>
-    <label for="password">Password:</label>
-    <input type="password" id="password" name="password" required>
-    <button type="submit">Login</button>
-</form>
+  <!-- Account/Profile Section -->
+<section id="profile" class="page-section">
+    <h2>Account Profile</h2>
+    <div class="profile-info">
+        <p>Username: [Username]</p>
+        <p>Email: [User Email]</p>
+        <p>Membership: [Membership Status]</p>
+    </div>
+    <button>Edit Profile</button>
+    <button>Log Out</button>
+</section>
 
+  <!-- Payment Section -->
+<section id="payment" class="page-section">
+    <h2>Payment</h2>
+    <form>
+        <label for="card-number">Card Number:</label>
+        <input type="text" id="card-number" name="card-number" required>
 
+        <label for="card-expiry">Expiry Date:</label>
+        <input type="month" id="card-expiry" name="card-expiry" required>
 
-        <p>Content for Retro section.</p>
-    </section>
+        <label for="card-cvc">CVC:</label>
+        <input type="text" id="card-cvc" name="card-cvc" required>
+
+        <button type="submit">Submit Payment</button>
+    </form>
+</section>
+
+  <!-- Signup Section -->
+<section id="signup" class="page-section">
+    <h2>Sign Up</h2>
+    <form method="POST" action="signup.php">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+
+        <label for="confirm-password">Confirm Password:</label>
+        <input type="password" id="confirm-password" name="confirm-password" required>
+
+        <button type="submit">Sign Up</button>
+    </form>
+</section>
+
+  <!-- Login Section -->
+<section id="login" class="page-section">
+    <h2>Login</h2>
+    <form method="POST" action="login.php">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+
+        <button type="submit">Login</button>
+    </form>
+</section>
+
   
 </main>
 
