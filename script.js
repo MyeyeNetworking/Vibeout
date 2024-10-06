@@ -387,6 +387,39 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
+// Check if user is logged in
+function isLoggedIn() {
+    return localStorage.getItem('isLoggedIn') === 'true'; // returns true if logged in
+}
+
+// Function to redirect if not logged in
+function checkLogin() {
+    if (!isLoggedIn()) {
+        window.location.href = '#login'; // Redirect to login page
+    }
+}
+
+// Check login when the 'Promote Event' tab is clicked
+document.querySelector('a[data-page="promote"]').addEventListener('click', function (e) {
+    e.preventDefault();
+    checkLogin(); // Check login before navigating
+});
+
+// Handle login submission (mock logic)
+document.querySelector('#login-page form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    // Mock login - usually, you'll check the credentials via an API
+    localStorage.setItem('isLoggedIn', 'true'); // Store login status
+    alert('Login successful!');
+    window.location.href = '#promote'; // Redirect to promote page
+});
+
+// Test: Check if user is redirected to login when clicking 'Promote Event' without being logged in
+document.addEventListener('DOMContentLoaded', () => {
+    const promoteLink = document.querySelector('a[data-page="promote"]');
+    promoteLink.click(); // Simulate clicking 'Promote Event'
+    console.assert(window.location.hash === '#login', 'User should be redirected to login page if not logged in');
+});
 
 
 
