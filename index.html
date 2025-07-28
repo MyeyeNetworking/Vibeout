@@ -4,28 +4,51 @@
   <meta charset="UTF-8">
   <title>Near Me</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
   <style>
     body {
       margin: 0;
       font-family: Arial, sans-serif;
+      background: #fff;
     }
-    #map {
-      width: 100%;
-      height: calc(100vh - 60px); /* leave room for navbar */
-    }
-    .leaflet-popup-content {
+    h2 {
       text-align: center;
+      padding: 16px;
+      margin: 0;
     }
-    .popup-btn {
-      display: inline-block;
-      margin: 5px;
+    .event-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 16px;
+      padding: 16px;
+    }
+    .event-card {
+      background: #f0f0f0;
+      border-radius: 12px;
+      overflow: hidden;
+      text-align: center;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      padding-bottom: 10px;
+    }
+    .event-card img {
+      width: 100%;
+      height: 120px;
+      object-fit: cover;
+    }
+    .event-card h3 {
+      margin: 8px 0;
+    }
+    .event-card p {
+      font-size: 14px;
+      padding: 0 8px;
+      color: #555;
+    }
+    .event-card button {
+      margin: 4px;
       padding: 6px 12px;
       background: #ff4b5c;
       color: white;
       border: none;
       border-radius: 6px;
-      text-decoration: none;
       cursor: pointer;
     }
     .navbar {
@@ -43,24 +66,18 @@
       color: #333;
       font-size: 14px;
     }
-    .locate-btn {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      z-index: 1000;
-      background: #007bff;
-      color: white;
-      border: none;
-      padding: 8px 12px;
-      border-radius: 6px;
-      cursor: pointer;
+    .spacer {
+      height: 60px;
     }
   </style>
 </head>
 <body>
-  <div id="map"></div>
-  <button class="locate-btn" onclick="locateUser()">Use My Location</button>
+  <h2>Events Near Me</h2>
+  <div id="event-cards" class="event-grid">
+    <p style="grid-column: 1 / -1; text-align: center;">Loading nearby events...</p>
+  </div>
 
+  <div class="spacer"></div>
   <div class="navbar">
     <a href="#">Happening Now</a>
     <a href="#">Events</a>
@@ -69,60 +86,49 @@
     <a href="#">Profile</a>
   </div>
 
-  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
   <script>
-    // Initialize map
-    const map = L.map('map').setView([18.1096, -77.2975], 8); // Default: Jamaica
-
-    // Add OpenStreetMap tiles
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      maxZoom: 19,
-    }).addTo(map);
-
-    // Sample event data
-    const events = [
-      {
-        title: "Event 1",
-        description: "Don't miss this amazing show!",
-        lat: 18.4721,
-        lng: -77.919,
-        ticketUrl: "#",
-      },
-      {
-        title: "Event 2",
-        description: "Live music and great vibes.",
-        lat: 18.0153,
-        lng: -76.8099,
-        ticketUrl: "#",
-      }
-    ];
-
-    // Add markers
-    events.forEach(event => {
-      const popupContent = `
-        <strong>${event.title}</strong><br>
-        ${event.description}<br>
-        <a href="${event.ticketUrl}" class="popup-btn">Get Ticket</a>
-        <a href="https://www.google.com/maps/dir/?api=1&destination=${event.lat},${event.lng}" target="_blank" class="popup-btn">Get Directions</a>
-      `;
-      L.marker([event.lat, event.lng]).addTo(map).bindPopup(popupContent);
-    });
-
-    // Function to locate the user
-    function locateUser() {
+    function fetchNearbyEvents() {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(position => {
-          const userLat = position.coords.latitude;
-          const userLng = position.coords.longitude;
-          map.setView([userLat, userLng], 14);
-          L.marker([userLat, userLng]).addTo(map).bindPopup("You are here!").openPopup();
+          const lat = position.coords.latitude;
+          const lng = position.coords.longitude;
+
+          fetch(`get_nearby_events.php?lat=${lat}&lng=${lng}`)
+            .then(response => response.json())
+            .then(events => {
+              const container = document.getElementById('event-cards');
+              container.innerHTML = '';
+
+              if (events.length === 0) {
+                container.innerHTML = '<p style="grid-column: 1 / -1; text-align: center;">No events found nearby.</p>';
+                return;
+              }
+
+              events.forEach(event => {
+                const card = document.createElement('div');
+                card.className = 'event-card';
+                card.innerHTML = `
+                  <img src="${event.image}" alt="${event.title}" />
+                  <h3>${event.title}</h3>
+                  <p>${event.description}</p>
+                  <button onclick="window.open('${event.ticket_url}', '_blank')">Get Ticket</button>
+                  <button onclick="window.open('https://www.google.com/maps/dir/?api=1&destination=${event.latitude},${event.longitude}', '_blank')">Get Directions</button>
+                `;
+                container.appendChild(card);
+              });
+            })
+            .catch(() => {
+              document.getElementById('event-cards').innerHTML = '<p style="grid-column: 1 / -1; text-align: center;">Failed to load events.</p>';
+            });
         }, () => {
-          alert("Unable to retrieve your location");
+          document.getElementById('event-cards').innerHTML = '<p style="grid-column: 1 / -1; text-align: center;">Location access denied.</p>';
         });
       } else {
-        alert("Geolocation is not supported by your browser");
+        alert('Geolocation not supported by your browser');
       }
     }
+
+    document.addEventListener('DOMContentLoaded', fetchNearbyEvents);
   </script>
 </body>
 </html>
