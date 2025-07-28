@@ -1,9 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Near Me</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Events App</title>
   <style>
     body {
       margin: 0;
@@ -11,46 +9,156 @@
       background: #fff;
     }
     h2 {
-      text-align: center;
       padding: 16px;
       margin: 0;
     }
-    .event-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-      gap: 16px;
-      padding: 16px;
-    }
-    .event-card {
-      background: #f0f0f0;
-      border-radius: 12px;
+
+    .slideshow-container {
+      position: relative;
+      max-width: 100%;
+      height: 200px;
       overflow: hidden;
-      text-align: center;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      padding-bottom: 10px;
     }
-    .event-card img {
+    
+    .slideshow-container::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+  pointer-events: none;
+}
+
+
+    .slide {
+      display: none;
+      width: 100%;
+      height: 100%;
+    }
+
+    .slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .fade {
+      animation: fade 1s ease-in-out;
+    }
+
+    @keyframes fade {
+      from {opacity: .9}
+      to {opacity: 9}
+    }
+
+    .card-section {
+      margin-bottom: 24px;
+    }
+
+    .card-slider {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      gap: 12px;
+      padding: 0 16px;
+      scrollbar-width: none;
+    }
+
+    .card-slider::-webkit-scrollbar {
+      display: none;
+    }
+
+    .card {
+      flex: 0 0 auto;
+      width: 220px;
+      height: auto;
+      background: #fff;
+      border-radius: 12px;
+      scroll-snap-align: start;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      cursor: pointer;
+      margin-bottom: 16px;
+    }
+
+    .card img {
       width: 100%;
       height: 120px;
       object-fit: cover;
     }
-    .event-card h3 {
-      margin: 8px 0;
+
+    .card-content {
+      padding: 12px;
     }
-    .event-card p {
+
+    .card-title {
+      font-size: 16px;
+      font-weight: bold;
+      margin-bottom: 6px;
+    }
+
+    .card-description {
       font-size: 14px;
-      padding: 0 8px;
       color: #555;
     }
-    .event-card button {
-      margin: 4px;
-      padding: 6px 12px;
-      background: #ff4b5c;
-      color: white;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
+
+    .nav-card {
+      background-color: #333;
+      color: #fff;
+      text-decoration: none;
+      flex: 0 0 auto;
+      width: 120px;
+      height: 178px;
+      border-radius: 12px;
+      scroll-snap-align: start;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      text-align: center;
     }
+
+    .category-card {
+      flex: 0 0 auto;
+      width: 180px;
+      height: 120px;
+      background: #f0f0f0;
+      border-radius: 12px;
+      scroll-snap-align: start;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 16px;
+    }
+    
+    .cnavcard 
+     {
+      background-color: #333;
+      color: #fff;
+      text-decoration: none;
+      flex: 0 0 auto;
+      width: 120px;
+      height: 120px;
+      border-radius: 12px;
+      scroll-snap-align: start;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      text-align: center;
+    }
+    
+
+
     .navbar {
       position: fixed;
       bottom: 0;
@@ -61,74 +169,283 @@
       border-top: 1px solid #ccc;
       padding: 8px 0;
     }
+
     .navbar a {
       text-decoration: none;
       color: #333;
       font-size: 14px;
     }
+
     .spacer {
       height: 60px;
     }
+
+    /* --- Modal Styles --- */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(4px);
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+    }
+    .modal-content {
+      background: #fff;
+      border-radius: 12px;
+      padding: 10px;
+      width: 400px;
+      max-width: 90%;
+      position: relative;
+      text-align: center;
+    }
+    .modal-content img {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      margin-bottom: 16px;
+      border-radius: 8px;
+    }
+    .modal-content .card-title {
+      font-size: 20px;
+      margin-bottom: 12px;
+    }
+    .modal-content .card-description {
+      font-size: 16px;
+      color: #333;
+    }
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 24px;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
   </style>
 </head>
-<body>
-  <h2>Events Near Me</h2>
-  <div id="event-cards" class="event-grid">
-    <p style="grid-column: 1 / -1; text-align: center;">Loading nearby events...</p>
+<body>  
+<div class="slideshow-container">
+    <div class="slide fade"><img src="images/slide1.jpg" alt="Slide 1"></div>
+    <div class="slide fade"><img src="images/slide2.jpg" alt="Slide 2"></div>
+    <div class="slide fade"><img src="images/slide3.jpg" alt="Slide 3"></div>
+</div>  <h2>Upcoming Events</h2>
+  <div class="card-slider">
+    <div class="card">
+      <img src="images/upcoming1.jpg" alt="Event 1">
+      <div class="card-content">
+        <div class="card-title">Event 1</div>
+        <div class="card-description">Don't miss this amazing show!</div>
+      </div>
+    </div>
+    <div class="card">
+      <img src="images/upcoming2.jpg" alt="Event 2">
+      <div class="card-content">
+        <div class="card-title">Event 2</div>
+        <div class="card-description">Live music and great vibes.</div>
+        
+      </div>
+    </div>
+    <div class="card">
+      <img src="images/upcoming3.jpg" alt="Event 2">
+      <div class="card-content">
+        <div class="card-title">Event 2</div>
+        <div class="card-description">Live music and great vibes.</div>
+        
+      </div>
+    </div>
+    <div class="card">
+      <img src="images/upcoming4.jpg" alt="Event 2">
+      <div class="card-content">
+        <div class="card-title">Event 2</div>
+        <div class="card-description">Live music and great vibes.</div>
+        
+      </div>
+    </div>
+    <div class="card">
+      <img src="images/upcoming5.jpg" alt="Event 2">
+      <div class="card-content">
+        <div class="card-title">Event 2</div>
+        <div class="card-description">Live music and great vibes.</div>
+        
+      </div>
+    </div>
+    
+    <a href="upcoming.html" class="nav-card">View All</a>
+  </div>  <h2>Near Me</h2>
+  <div class="card-slider">
+    <div class="card">
+      <img src="images/0.jpg" alt="Local 1">
+      <div class="card-content">
+        <div class="card-title">Local 1</div>
+        <div class="card-description">Events close to your location.</div>
+      </div>
+    </div>
+    <div class="card">
+      <img src="images/0.jpg" alt="Local 2">
+      <div class="card-content">
+        <div class="card-title">Local 2</div>
+        <div class="card-description">Pop-up nearby venue!</div>
+      </div>
+    </div>
+    <div class="card">
+      <img src="images/0.jpg" alt="Local 2">
+      <div class="card-content">
+        <div class="card-title">Local 2</div>
+        <div class="card-description">Pop-up nearby venue!</div>
+      </div>
+    </div>
+    <div class="card">
+      <img src="images/0.jpg" alt="Local 2">
+      <div class="card-content">
+        <div class="card-title">Local 2</div>
+        <div class="card-description">Pop-up nearby venue!</div>
+      </div>
+    </div>
+    <div class="card">
+      <img src="images/0.jpg" alt="Local 2">
+      <div class="card-content">
+        <div class="card-title">Local 2</div>
+        <div class="card-description">Pop-up nearby venue!</div>
+      </div>
+    </div>
+    <a href="nearme.html" class="nav-card">View All</a>
+  </div>  <h2>All Events</h2>
+  <div class="card-slider">
+    <div class="card">
+      <img src="images/0.jpg" alt="Event A">
+      <div class="card-content">
+        <div class="card-title">Event A</div>
+        <div class="card-description">Check out this all-star lineup.</div>
+      </div>
+    </div>
+    <div class="card">
+      <img src="images/0.jpg" alt="Event B">
+      <div class="card-content">
+        <div class="card-title">Event B</div>
+        <div class="card-description">Dance the night away!</div>
+      </div>
+    </div>
+    <div class="card">
+      <img src="images/0.jpg" alt="Event B">
+      <div class="card-content">
+        <div class="card-title">Event B</div>
+        <div class="card-description">Dance the night away!</div>
+      </div>
+    </div>
+    <div class="card">
+      <img src="images/0.jpg" alt="Event B">
+      <div class="card-content">
+        <div class="card-title">Event B</div>
+        <div class="card-description">Dance the night away!</div>
+      </div>
+    </div>
+    <div class="card">
+      <img src="images/0.jpg" alt="Event B">
+      <div class="card-content">
+        <div class="card-title">Event B</div>
+        <div class="card-description">Dance the night away!</div>
+      </div>
+    </div>
+    <a href="allevents.html" class="nav-card">View All</a>
+  </div>  <h2>Categories</h2>
+  <div class="card-slider">
+    <div class="category-card">Dancehall</div>
+    <div class="category-card">Reggae</div>
+    <div class="category-card">Soca</div>
+    <div class="category-card">Retro</div>
+    <div class="category-card">Other</div>
+    <a href="categories.html" class="cnavcard">View All</a>
+  </div>  <h2>Testimonials</h2>
+  <div class="card-slider">
+    <div class="card">
+      <img src="images/test1.jpg" alt="Testimonial 1">
+      <div class="card-content">
+        <div class="card-title">"Loved it!"</div>
+        <div class="card-description">Best event of the year.</div>
+      </div>
+    </div>
+    <div class="card">
+      <img src="images/test2.jpg" alt="Testimonial 2">
+      <div class="card-content">
+        <div class="card-title">"Great vibes"</div>
+        <div class="card-description">Definitely going again.</div>
+      </div>
+    </div>
+    <a href="gallery.html" class="nav-card">View All</a>
   </div>
+<!-- ... testimonials ... -->
 
-  <div class="spacer"></div>
-  <div class="navbar">
-    <a href="#">Happening Now</a>
-    <a href="#">Events</a>
-    <a href="#">Categories</a>
-    <a href="#">Gallery</a>
-    <a href="#">Profile</a>
+<!-- Modal Structure -->
+<div id="eventModal" class="modal">
+  <div class="modal-content">
+    <button class="close-btn">&times;</button>
+    <img id="modalImage" src="" alt="">
+    <div id="modalTitle" class="card-title"></div>
+    <div id="modalDescription" class="card-description"></div>
   </div>
+</div>
 
-  <script>
-    function fetchNearbyEvents() {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(position => {
-          const lat = position.coords.latitude;
-          const lng = position.coords.longitude;
+<div class="spacer"></div>
+<div class="navbar">
+  <a href="happening.html">Happening Now</a>
+  <a href="allevents.html">Events</a>
+  <a href="categories.html">Categories</a>
+  <a href="gallery.html">Gallery</a>
+  <a href="">Profile</a>
+</div>
 
-          fetch(`get_nearby_events.php?lat=${lat}&lng=${lng}`)
-            .then(response => response.json())
-            .then(events => {
-              const container = document.getElementById('event-cards');
-              container.innerHTML = '';
+<script>
+  let slideIndex = 0;
+  const slides = document.getElementsByClassName("slide");
 
-              if (events.length === 0) {
-                container.innerHTML = '<p style="grid-column: 1 / -1; text-align: center;">No events found nearby.</p>';
-                return;
-              }
-
-              events.forEach(event => {
-                const card = document.createElement('div');
-                card.className = 'event-card';
-                card.innerHTML = `
-                  <img src="${event.image}" alt="${event.title}" />
-                  <h3>${event.title}</h3>
-                  <p>${event.description}</p>
-                  <button onclick="window.open('${event.ticket_url}', '_blank')">Get Ticket</button>
-                  <button onclick="window.open('https://www.google.com/maps/dir/?api=1&destination=${event.latitude},${event.longitude}', '_blank')">Get Directions</button>
-                `;
-                container.appendChild(card);
-              });
-            })
-            .catch(() => {
-              document.getElementById('event-cards').innerHTML = '<p style="grid-column: 1 / -1; text-align: center;">Failed to load events.</p>';
-            });
-        }, () => {
-          document.getElementById('event-cards').innerHTML = '<p style="grid-column: 1 / -1; text-align: center;">Location access denied.</p>';
-        });
-      } else {
-        alert('Geolocation not supported by your browser');
-      }
+  function showSlides() {
+    for (let i = 0; i < slides.length; i++) {
+      slides[i].style.display = "none";
     }
+    slideIndex++;
+    if (slideIndex > slides.length) { slideIndex = 1 }
+    slides[slideIndex - 1].style.display = "block";
+    setTimeout(showSlides, 4000);
+  }
+  showSlides();
 
-    document.addEventListener('DOMContentLoaded', fetchNearbyEvents);
-  </script>
+  // --- Modal Script ---
+  const modal = document.getElementById('eventModal');
+  const modalImage = document.getElementById('modalImage');
+  const modalTitle = document.getElementById('modalTitle');
+  const modalDescription = document.getElementById('modalDescription');
+  const closeBtn = modal.querySelector('.close-btn');
+
+  document.querySelectorAll('.card').forEach(card => {
+    card.addEventListener('click', () => {
+      const img = card.querySelector('img').src;
+      const title = card.querySelector('.card-title').textContent;
+      const description = card.querySelector('.card-description').textContent;
+
+      modalImage.src = img;
+      modalTitle.textContent = title;
+      modalDescription.textContent = description;
+
+      modal.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    });
+  });
+
+  closeBtn.addEventListener('click', closeModal);
+  modal.addEventListener('click', e => {
+    if (e.target === modal) closeModal();
+  });
+
+  function closeModal() {
+    modal.style.display = 'none';
+    document.body.style.overflow = 'auto';
+  }
+</script>
 </body>
 </html>
